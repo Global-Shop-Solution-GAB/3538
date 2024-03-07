@@ -1,0 +1,1072 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Part Information")
+gui.SS_Form1..size(13350,3270)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,events)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_txtPart.create(label,"Part",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtPart.defaultvalue("")
+gui.SS_Form1.lbl_txtPart.controlgroup(0)
+gui.SS_Form1.txtPart.create(textbox,"",True,2700,330,0,100,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtPart.defaultvalue("")
+gui.SS_Form1.txtPart.controlgroup(1)
+gui.SS_Form1.lbl_txtUOM.create(label,"UOM",True,1800,200,1,2885,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtUOM.defaultvalue("")
+gui.SS_Form1.lbl_txtUOM.controlgroup(0)
+gui.SS_Form1.txtUOM.create(textbox,"",True,900,330,0,2885,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtUOM.defaultvalue("")
+gui.SS_Form1.txtUOM.controlgroup(1)
+gui.SS_Form1.cmd_txtUOM.create(button)
+gui.SS_Form1.cmd_txtUOM.caption("^")
+gui.SS_Form1.cmd_txtUOM.visible(True)
+gui.SS_Form1.cmd_txtUOM.size(330,330)
+gui.SS_Form1.cmd_txtUOM.zorder(0)
+gui.SS_Form1.cmd_txtUOM.position(3870,335)
+gui.SS_Form1.cmd_txtUOM.enabled(True)
+gui.SS_Form1.cmd_txtUOM.fontname("Arial")
+gui.SS_Form1.cmd_txtUOM.fontsize(8)
+gui.SS_Form1.cmd_txtUOM.event(click,events)
+gui.SS_Form1.cmd_txtUOM.defaultvalue("")
+gui.SS_Form1.cmd_txtUOM.controlgroup(0)
+gui.SS_Form1.lbl_txtDescription.create(label,"Description",True,1800,200,1,4340,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtDescription.defaultvalue("")
+gui.SS_Form1.lbl_txtDescription.controlgroup(0)
+gui.SS_Form1.txtDescription.create(textbox,"",True,5400,330,0,4340,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtDescription.defaultvalue("")
+gui.SS_Form1.txtDescription.controlgroup(1)
+gui.SS_Form1.lbl_txtPL.create(label,"PL",True,1800,200,1,9825,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtPL.defaultvalue("")
+gui.SS_Form1.lbl_txtPL.controlgroup(0)
+gui.SS_Form1.txtPL.create(textbox,"",True,900,330,0,9825,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtPL.defaultvalue("")
+gui.SS_Form1.txtPL.controlgroup(1)
+gui.SS_Form1.cmd_txtPL.create(button)
+gui.SS_Form1.cmd_txtPL.caption("^")
+gui.SS_Form1.cmd_txtPL.visible(True)
+gui.SS_Form1.cmd_txtPL.size(330,330)
+gui.SS_Form1.cmd_txtPL.zorder(0)
+gui.SS_Form1.cmd_txtPL.position(10810,335)
+gui.SS_Form1.cmd_txtPL.enabled(True)
+gui.SS_Form1.cmd_txtPL.fontname("Arial")
+gui.SS_Form1.cmd_txtPL.fontsize(8)
+gui.SS_Form1.cmd_txtPL.event(click,events)
+gui.SS_Form1.cmd_txtPL.defaultvalue("")
+gui.SS_Form1.cmd_txtPL.controlgroup(0)
+gui.SS_Form1.lbl_txtAlt1.create(label,"Alternate Description 1",True,1800,200,1,100,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtAlt1.defaultvalue("")
+gui.SS_Form1.lbl_txtAlt1.controlgroup(0)
+gui.SS_Form1.txtAlt1.create(textbox,"",True,5400,330,0,100,1035,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtAlt1.defaultvalue("")
+gui.SS_Form1.txtAlt1.controlgroup(1)
+gui.SS_Form1.lbl_txtAlt2.create(label,"Alternate Description 2",True,1800,200,1,100,1535,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtAlt2.defaultvalue("")
+gui.SS_Form1.lbl_txtAlt2.controlgroup(0)
+gui.SS_Form1.txtAlt2.create(textbox,"",True,5400,330,0,100,1735,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtAlt2.defaultvalue("")
+gui.SS_Form1.txtAlt2.controlgroup(1)
+gui.SS_Form1.lbl_txtPrice.create(label,"Price",True,1800,200,1,11280,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtPrice.defaultvalue("")
+gui.SS_Form1.lbl_txtPrice.controlgroup(0)
+gui.SS_Form1.txtPrice.create(textbox,"",True,1800,330,0,11280,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtPrice.numericonly(1)
+gui.SS_Form1.txtPrice.defaultvalue("")
+gui.SS_Form1.txtPrice.controlgroup(1)
+gui.SS_Form1.cmdSave.create(button)
+gui.SS_Form1.cmdSave.caption("Save")
+gui.SS_Form1.cmdSave.visible(True)
+gui.SS_Form1.cmdSave.size(1000,360)
+gui.SS_Form1.cmdSave.zorder(0)
+gui.SS_Form1.cmdSave.position(100,2335)
+gui.SS_Form1.cmdSave.enabled(True)
+gui.SS_Form1.cmdSave.fontname("Arial")
+gui.SS_Form1.cmdSave.fontsize(8)
+gui.SS_Form1.cmdSave.event(click,events)
+gui.SS_Form1.cmdSave.defaultvalue("")
+gui.SS_Form1.cmdSave.controlgroup(0)
+gui.SS_Form1.txtUOM.tabstop(true)
+gui.SS_Form1.txtUOM.tabindex(1)
+gui.SS_Form1.cmd_txtUOM.tabstop(true)
+gui.SS_Form1.cmd_txtUOM.tabindex(2)
+gui.SS_Form1.txtDescription.tabstop(true)
+gui.SS_Form1.txtDescription.tabindex(3)
+gui.SS_Form1.txtPL.tabstop(true)
+gui.SS_Form1.txtPL.tabindex(4)
+gui.SS_Form1.cmd_txtPL.tabstop(true)
+gui.SS_Form1.cmd_txtPL.tabindex(5)
+gui.SS_Form1.txtAlt1.tabstop(true)
+gui.SS_Form1.txtAlt1.tabindex(6)
+gui.SS_Form1.txtAlt2.tabstop(true)
+gui.SS_Form1.txtAlt2.tabindex(7)
+gui.SS_Form1.txtPrice.tabstop(true)
+gui.SS_Form1.txtPrice.tabindex(8)
+
+
+gui.f_Grid..create
+gui.f_Grid..caption("Inventor/XSteel Upload to Work Order")
+gui.f_Grid..size(15315,13140)
+gui.f_Grid..minx(0)
+gui.f_Grid..miny(0)
+gui.f_Grid..position(0,0)
+gui.f_Grid..event(unload,f_grid_unload)
+gui.f_Grid..alwaysontop(False)
+gui.f_Grid..fontname("Arial")
+gui.f_Grid..fontsize(8)
+gui.f_Grid..forecolor(0)
+gui.f_Grid..fontstyle(,,,,)
+gui.f_Grid..BackColor(-2147483633)
+gui.f_Grid..controlbox(True)
+gui.f_Grid..maxbutton(True)
+gui.f_Grid..minbutton(True)
+gui.f_Grid..mousepointer(0)
+gui.f_Grid..moveable(True)
+gui.f_Grid..sizeable(True)
+gui.f_Grid..ShowInTaskBar(True)
+gui.f_Grid..titlebar(True)
+gui.f_Grid.fgOps.create(gsflexgrid)
+gui.f_Grid.fgOps.FixedRows(0)
+gui.f_Grid.fgOps.FixedCols(0)
+gui.f_Grid.fgOps.visible(True)
+gui.f_Grid.fgOps.size(14840,11475)
+gui.f_Grid.fgOps.zorder(0)
+gui.f_Grid.fgOps.position(100,965)
+gui.f_Grid.fgOps.enabled(True)
+gui.f_Grid.fgOps.event(commandclick,events)
+gui.f_Grid.txtJob.create(textbox,"",True,1250,300,0,100,535,False,0,Arial,8,-2147483643,1)
+gui.f_Grid.txtJob.defaultvalue("")
+gui.f_Grid.txtJob.controlgroup(1)
+gui.f_Grid.lblJob.create(label,"Job/Project",True,1935,255,1,200,335,True,0,Arial,8,-2147483633,0)
+gui.f_Grid.lblJob.defaultvalue("")
+gui.f_Grid.lblJob.controlgroup(0)
+gui.f_Grid.txtCustomer.create(textbox,"",True,1250,300,0,1400,535,False,0,Arial,8,-2147483643,1)
+gui.f_Grid.txtCustomer.maxLength(6)
+gui.f_Grid.txtCustomer.defaultvalue("")
+gui.f_Grid.txtCustomer.controlgroup(1)
+gui.f_Grid.lblNameCust.create(label,"Customer Name",True,3500,255,1,2700,335,True,0,Arial,8,-2147483633,0)
+gui.f_Grid.lblNameCust.defaultvalue("")
+gui.f_Grid.lblNameCust.controlgroup(0)
+gui.f_Grid.txtNameCust.create(textbox,"",True,3500,300,0,2700,545,False,0,Arial,8,-2147483643,1)
+gui.f_Grid.txtNameCust.defaultvalue("")
+gui.f_Grid.txtNameCust.controlgroup(1)
+gui.f_Grid.dtpDue.create(datepicker)
+gui.f_Grid.dtpDue.visible(True)
+gui.f_Grid.dtpDue.size(1500,300)
+gui.f_Grid.dtpDue.zorder(0)
+gui.f_Grid.dtpDue.position(6250,535)
+gui.f_Grid.dtpDue.enabled(True)
+gui.f_Grid.dtpDue.checkbox(False)
+gui.f_Grid.dtpDue.defaultvalue("")
+gui.f_Grid.dtpDue.controlgroup(0)
+gui.f_Grid.cmdDue.create(button)
+gui.f_Grid.cmdDue.caption("Assign to All")
+gui.f_Grid.cmdDue.visible(True)
+gui.f_Grid.cmdDue.size(1250,300)
+gui.f_Grid.cmdDue.zorder(0)
+gui.f_Grid.cmdDue.position(7800,535)
+gui.f_Grid.cmdDue.enabled(True)
+gui.f_Grid.cmdDue.fontname("Arial")
+gui.f_Grid.cmdDue.fontsize(8)
+gui.f_Grid.cmdDue.event(click,cmddue_click)
+gui.f_Grid.cmdDue.defaultvalue("")
+gui.f_Grid.cmdDue.controlgroup(0)
+gui.f_Grid.lblDue.create(label,"Due Date Assignment",True,1500,255,1,6250,335,True,0,Arial,8,-2147483633,0)
+gui.f_Grid.lblDue.defaultvalue("")
+gui.f_Grid.lblDue.controlgroup(0)
+gui.f_Grid.lblCustomer.create(label,"Customer",True,1200,255,1,1400,335,True,0,Arial,8,-2147483633,0)
+gui.f_Grid.lblCustomer.defaultvalue("")
+gui.f_Grid.lblCustomer.controlgroup(0)
+gui.f_Grid.cmdUpload.create(button)
+gui.f_Grid.cmdUpload.caption("Upload")
+gui.f_Grid.cmdUpload.visible(True)
+gui.f_Grid.cmdUpload.size(1500,300)
+gui.f_Grid.cmdUpload.zorder(0)
+gui.f_Grid.cmdUpload.position(9200,535)
+gui.f_Grid.cmdUpload.enabled(True)
+gui.f_Grid.cmdUpload.fontname("Arial")
+gui.f_Grid.cmdUpload.fontsize(8)
+gui.f_Grid.cmdUpload.event(click,cmdupload_click)
+gui.f_Grid.cmdUpload.defaultvalue("")
+gui.f_Grid.cmdUpload.controlgroup(0)
+gui.f_Grid.cmdCancel.create(button)
+gui.f_Grid.cmdCancel.caption("Cancel")
+gui.f_Grid.cmdCancel.visible(True)
+gui.f_Grid.cmdCancel.size(855,300)
+gui.f_Grid.cmdCancel.zorder(0)
+gui.f_Grid.cmdCancel.position(10800,535)
+gui.f_Grid.cmdCancel.enabled(True)
+gui.f_Grid.cmdCancel.fontname("Arial")
+gui.f_Grid.cmdCancel.fontsize(8)
+gui.f_Grid.cmdCancel.event(click,cmdcancel_click)
+gui.f_Grid.cmdCancel.defaultvalue("")
+gui.f_Grid.cmdCancel.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uRecords.Define("PARENT",String,PARENT)
+Variable.UDT.uRecords.Define("PART",String,PART)
+Variable.UDT.uRecords.Define("QTY",Float,QTY)
+Variable.UDT.uRecords.Define("TRMNL",String,TRMNL)
+Variable.UDT.uRecords.Define("JOB",String,JOB)
+Variable.UDT.uRecords.Define("Description",String,Description)
+Variable.UDT.uRecords.Define("Parent_Desc",String,Parent_Desc)
+Variable.UDT.uRecords.Define("Parent_Qty",String,Parent_Qty)
+Variable.UDT.uRecords.Define("Flag_Header",Boolean,Flag_Header)
+Variable.UDT.uRecords.Define("Flag_RM",Boolean,FLag_RM)
+Variable.UDT.uRecords.Define("FAT",String,FAT)
+Variable.UDT.uRecords.Define("Phantom",String,Phantom)
+Variable.uGlobal.uRecords.Declare("uRecords")
+Variable.UDT.uGrid.Define("Phase",String,Phase)
+Variable.UDT.uGrid.Define("Suffix",String,Suffix)
+Variable.UDT.uGrid.Define("Date_Due",Date,Date_Due)
+Variable.UDT.uGrid.Define("PL",String,PL)
+Variable.UDT.uGrid.Define("Part",String)
+Variable.UDT.uGrid.Define("Router",String)
+Variable.UDT.uGrid.Define("FAT",String)
+Variable.UDT.uGrid.Define("DESCRIPTION",String,DESCRIPTION)
+Variable.UDT.uGrid.Define("Qty",Float)
+Variable.UDT.uGrid.Define("RM",Boolean)
+Variable.UDT.uGrid.Define("Phantom",String)
+Variable.UDT.uGrid.Define("Flag",String)
+Variable.UDT.uGrid.Define("FLAG_INV",Boolean)
+Variable.UDT.uGrid.Define("Project_Group",String)
+Variable.uGlobal.uGrid.Declare("uGrid")
+Variable.UDT.uSuffix.Define("Suffix",String,Suffix)
+variable.uGlobal.uSuffix.Declare("uSuffix")
+Variable.Global.sSource.Declare(String)
+Variable.Global.sUpHead.Declare(String)
+Variable.Global.sUpOps.Declare(String)
+Variable.Global.sPL.Declare(String)
+Variable.Global.sRouters.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+
+'CALL SUB TO BUILD GRID
+F.Intrinsic.Control.CallSub(Buildstyle)
+F.Intrinsic.Control.CallSub(Get_data)
+F.Intrinsic.Control.CallSub(Loadscreen)
+
+Gui.f_Grid..Show
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.f_grid_unload.start
+
+F.Intrinsic.Control.End
+
+program.sub.f_grid_unload.End
+
+Program.Sub.BuildStyle.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStyle_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+Gui.f_Grid.fgOps.Rows(2)
+Gui.f_Grid.fgOps.FixedRows(1)
+Gui.f_Grid.fgOps.Cols(16)
+
+V.Local.i.Declare(Long)
+V.Local.sTitles.Declare(String)
+
+F.Intrinsic.String.Concat("Flag*!*Phase*!*Suffix*!*Due Date*!*Router*!*+*!*FAT*!*Parent",V.Ambient.NewLine,"or",V.Ambient.NewLine,"Part*!*Description*!*PL*!*+*!*WO Qty",V.ambient.newline,"or",V.ambient.newline,"Material Qty*!*Phantom*!*Inventory_Flag*!*Project Group*!*Source",V.local.sTitles)
+F.Intrinsic.String.Split(V.Local.sTitles,"*!*",V.Local.sTitles)
+
+Gui.f_Grid.fgOps.SetColumnPercentages(".03:.05:.05:.08:.08:.02:.06:.12:.16:.03:.02:.05:.07:.0:.0:.08")
+
+
+Gui.f_Grid.fgOps.RowHeight(0,850)
+
+GUI.f_Grid.fgOps.clearstyle(1)
+F.Intrinsic.Control.For(V.Local.i,0,15,1)
+	Gui.f_Grid.fgOps.TextMatrix(V.Local.i,0,V.Local.sTitles(v.Local.i).Trim)
+	Gui.f_Grid.fgOps.BuildStyle(1,V.Local.i,"FORMAT","ALIGNMENT",4)
+F.Intrinsic.Control.Next(V.Local.i)
+	
+Gui.f_Grid.fgOps.ApplyStyle(0,1)
+
+Gui.f_Grid.fgOps.ClearStyle(2)
+
+Gui.f_Grid.fgOps.BuildStyle(2,0,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,1,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,2,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,3,"Type","DatePicker",)
+Gui.f_Grid.fgOps.BuildStyle(2,4,"Type","Locked",False)
+Gui.f_Grid.fgOps.BuildStyle(2,5,"Type","Command","+")
+Gui.f_Grid.fgOps.BuildStyle(2,6,"Type","Locked",False)
+Gui.f_Grid.fgOps.BuildStyle(2,7,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,8,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,9,"Type","Locked",False)
+Gui.f_Grid.fgOps.BuildStyle(2,10,"Type","Command","+")
+Gui.f_Grid.fgOps.BuildStyle(2,11,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,12,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(2,15,"Type","Command","Purchase")
+'Gui.f_Grid.fgOps.BuildStyle(2,15,"Color","Back",V.Color.LtGray)
+
+gui.f_Grid.fgOps.clearstyle(3)
+
+Gui.f_Grid.fgOps.BuildStyle(3,0,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,1,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,1,"color","Back",V.Color.LtGray)
+Gui.f_Grid.fgOps.BuildStyle(3,2,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,2,"color","Back",V.Color.LtGray)
+Gui.f_Grid.fgOps.BuildStyle(3,3,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,3,"color","Back",V.Color.LtGray)
+Gui.f_Grid.fgOps.BuildStyle(3,4,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,4,"color","Back",V.Color.LtGray)
+Gui.f_Grid.fgOps.BuildStyle(3,5,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,5,"color","Back",V.Color.LtGray)
+Gui.f_Grid.fgOps.BuildStyle(3,6,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,7,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,9,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,10,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,10,"Color","Back",V.Color.LtGray)
+Gui.f_Grid.fgOps.BuildStyle(3,11,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,12,"Type","Locked",True)
+Gui.f_Grid.fgOps.BuildStyle(3,15,"Type","Command","Source")
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("BuildStyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStyle.End
+
+Program.Sub.Get_Data.Start
+F.Intrinsic.Control.SetErrorHandler("Get_Data_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.iAdd.Declare(Long)
+V.Local.sPhase.Declare(String)
+V.Local.sJob.Declare(String)
+V.Local.sSuffix.Declare(String)
+V.Local.sCustomer.Declare(String)
+V.Local.iSuffix.Declare(String)
+V.Local.sDSN.Declare(String)
+V.Local.iL.Declare(Long)
+V.Local.bString.Declare(Boolean)
+V.Local.sTemp.Declare(String)
+V.Local.sGetID.Declare(String)
+V.Local.bValid.Declare(Boolean,False)
+V.Local.iCount.Declare(Long,0)
+
+V.uGlobal.uGrid.Redim(-1,-1)
+F.ODBC.Connection!CONX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass,7200)
+
+F.Intrinsic.String.Concat("SELECT * FROM GCG_3538_LMD_WOUPL_T WHERE TRMNL = '",V.Caller.Terminal,"' ORDER BY PARENT ASC, PART ASC, FLAG_HEADER DESC",V.Local.sSQL)
+F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("Conx","rst","V.uGlobal.uRecords",False)
+F.ODBC.CONX!rst.Close
+
+F.Intrinsic.Variable.UDTMultiFlag(V.uGlobal.uRecords!PARENT,"")
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uRecords)
+F.Intrinsic.Control.If(V.uGlobal.uRecords!PARENT.UBound,<,0)
+	F.Intrinsic.UI.Msgbox("No records exist to upload. You must first upload a file.")
+	F.ODBC.Connection!CONX.Close
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.InvokeWaitDialog("Manipulating Data, Loading Screen","Please Wait")
+
+Gui.f_Grid.txtJob.Text(V.uGlobal.uRecords(0)!JOB.Trim)
+F.Intrinsic.String.Concat("SELECT A.CUSTOMER, B.NAME_CUSTOMER FROM V_PROJECT_MASTER AS A LEFT JOIN V_CUSTOMER_MASTER AS B ON A.CUSTOMER = B.CUSTOMER WHERE A.PROJECT = '",V.Screen.f_Grid!txtJob.Text,"' ",V.Local.sSQL)
+F.ODBC.Connection!CONX.OpenLocalRecordsetRO("RST",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+	Gui.f_Grid.txtCustomer.Text(V.ODBC.CONX!rst.FieldValTrim!Customer)
+	Gui.f_Grid.txtNameCust.Text(V.ODBC.CONX!rst.FieldValTrim!name_customer)
+F.Intrinsic.Control.EndIf
+F.ODBC.CONX!rst.Close
+
+'GET SUFFIXES
+'SINCE JOB IS THE SAME FOR ALL RECORDS IN THE UDT, GRAB THE FIRST RECORD SO SUFFIX LOOKUP CAN BE PERFORMED.
+V.Local.sJob.Set(V.Screen.f_Grid!txtJob.Text)
+F.Intrinsic.String.Build("select Suffix from Job_Header where Job = '{0}' order by Suffix desc",V.Local.sJob,V.Local.sGetID)
+F.ODBC.Connection!CONX.ExecuteAndReturn(V.Local.sGetID,V.Local.sGetID)
+F.Intrinsic.String.Replace(V.Local.sGetID,"#$#","",V.Local.sGetID)
+F.Intrinsic.String.Split(V.Local.sGetID,"*!*",V.Local.sGetID)
+'V.Local.sSuffix.Set(V.Local.sGetID(0))
+F.Intrinsic.String.LPad(V.Local.sGetID(0),"0",3,V.Local.sSuffix)
+
+F.Intrinsic.Control.For(V.Local.i,0,V.uGlobal.uRecords.UBound,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Manipulating Data, Loading Screen",V.Local.i,0,V.uGlobal.uRecords.UBound)
+	F.Intrinsic.Control.If(V.uGlobal.ugrid.UBound,=,-1)
+		V.uGlobal.ugrid.Redim(0,0)
+		V.Local.iAdd.Set(0)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Add(V.Local.iAdd,1,V.Local.iAdd)
+		V.uGlobal.uGrid.RedimPreserve(0,V.Local.iAdd)
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.If(V.uGlobal.uRecords(v.Local.i)!FLAG_HEADER,=,True)
+		'GET NEXT SUFFIX FOR NEW PARENT
+		f.Intrinsic.String.Base36Increment(V.Local.sSuffix,V.Local.sSuffix)
+		F.Intrinsic.String.LPad(V.Local.sSuffix,"0",3,V.Local.sSuffix)
+
+		' loop through this step fo be sure the suffix is valid
+		V.Local.bValid.Set(False)
+		F.Intrinsic.Control.Dountil(V.Local.bValid,=,True)
+			F.Intrinsic.String.Build("select Suffix from Job_Header where Job = '{0}' and Suffix = '{1}' ",V.Local.sJob,V.Local.sSuffix,V.Local.sGetID)
+			F.ODBC.Connection!CONX.ExecuteAndReturn(V.Local.sGetID,V.Local.sGetID)
+			F.Intrinsic.Control.If(V.Local.sGetID.Trim,=,"")
+				V.Local.bValid.Set(True)
+			F.Intrinsic.Control.Else
+				f.Intrinsic.String.Base36Increment(V.Local.sSuffix,V.Local.sSuffix)
+				F.Intrinsic.String.LPad(V.Local.sSuffix,"0",3,V.Local.sSuffix)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Loop
+
+		'--------------START SETTING UDT VALUES
+		'FLAG
+		V.uGlobal.uGrid(V.Local.iAdd)!Flag.Set("H")
+		'PHASE
+		F.Intrinsic.Control.For(V.Local.iL,1,V.uGlobal.uRecords(v.Local.i)!PARENT.Length,1)
+			F.Intrinsic.String.Mid(V.uGlobal.uRecords(v.Local.i)!PARENT,V.Local.iL,1,V.Local.sTemp)
+			F.Intrinsic.Control.If(V.Local.sTemp.IsNumeric,=,True)
+				F.Intrinsic.Math.Sub(V.Local.iL,1,V.Local.iL)
+				F.Intrinsic.Control.If(V.Local.iL,=,0)
+					V.Local.iL.Set(1)
+				F.Intrinsic.Control.EndIf
+				F.Intrinsic.String.Mid(V.uGlobal.uRecords(v.Local.i)!PARENT,V.Local.iL,1,V.Local.sPhase)
+				V.uGlobal.uGrid(v.Local.iAdd)!Phase.Set(V.Local.sPhase)
+				F.Intrinsic.Control.ExitFor(V.Local.iL)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Next(V.Local.iL)
+		'SUFFIX
+		F.Intrinsic.String.LPad(V.Local.sSuffix,"0",3,V.uGlobal.uGrid(v.Local.iAdd)!Suffix)
+		'PRODUCT LINE		
+		F.Intrinsic.String.Concat("SELECT PRODUCT_LINE FROM V_INVENTORY_MSTR WHERE PART = '",V.uGlobal.uRecords(V.Local.i)!PARENT.Trim,"'",V.Local.sSQL)
+		F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+			V.uGlobal.uGrid(V.Local.iAdd)!PL.Set(V.ODBC.CONX!rst.FieldValTrim!PRODUCT_LINE)
+			V.uGlobal.uGrid(v.Local.iAdd)!Flag_Inv.Set(True)
+		F.Intrinsic.Control.Else
+			V.uGlobal.uGrid(v.Local.iAdd)!Flag_Inv.Set(False)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.CONX!rst.Close
+		'FAT
+		V.uGlobal.uGrid(V.Local.iAdd)!FAT.Set(V.uGlobal.uRecords(V.Local.i)!FAT.Trim)
+		'PARENT
+		V.uGlobal.uGrid(V.Local.iAdd)!Part.Set(V.uGlobal.uRecords(V.Local.i)!PARENT.Trim)
+		'DESCRIPTION
+		V.uGlobal.uGrid(V.Local.iAdd)!DESCRIPTION.Set(V.uGlobal.uRecords(V.Local.i)!Parent_Desc.Trim)
+		'QTY
+		V.uGlobal.uGrid(V.Local.iAdd)!Qty.Set(V.uGlobal.uRecords(V.Local.i)!Parent_Qty.Float)
+		'RM
+		V.uGlobal.uGrid(V.Local.iAdd)!RM.Set(False)
+		'Phantom is blank
+	F.Intrinsic.Control.Else
+		'-----------------START SETTING UDT VALUES FOR CHILDREN
+		'FLAG
+		V.uGlobal.uGrid(V.Local.iAdd)!Flag.Set("O")
+		'SUFFIX
+		V.uGlobal.uGrid(v.Local.i)!Suffix.Set(V.Local.sSuffix)
+		'PRODUCT LINE
+		F.Intrinsic.String.Concat("SELECT a.PRODUCT_LINE,a.Description,b.Project_Group FROM V_INVENTORY_MSTR as A left Join V_INVENTORY_MST3 as b on a.part = b.part WHERE a.PART = '",V.uGlobal.uRecords(V.Local.i)!PART.Trim,"'",V.Local.sSQL)
+		F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+			V.uGlobal.uGrid(V.Local.iAdd)!PL.Set(V.ODBC.CONX!rst.FieldValTrim!PRODUCT_LINE)
+			V.uGlobal.uGrid(v.Local.iAdd)!DESCRIPTION.Set(V.ODBC.CONX!rst.FieldValTrim!Description)
+			V.uGlobal.uGrid(v.Local.iAdd)!Flag_Inv.Set(True)
+			V.uGlobal.uGrid(V.Local.iAdd)!Project_Group.Set(V.ODBC.CONX!rst.FieldValTrim!project_group)
+		F.Intrinsic.Control.Else
+			V.uGlobal.uGrid(v.Local.iAdd)!Flag_Inv.Set(False)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rst.Close
+		'QTY
+		V.uGlobal.uGrid(V.Local.iAdd)!QTY.Set(V.uGlobal.uRecords(V.Local.i)!QTY)
+		'PART
+		V.uGlobal.uGrid(V.Local.iAdd)!PART.Set(V.uGlobal.uRecords(V.Local.i)!PART.Trim)
+		'RM
+		V.uGlobal.uGrid(V.Local.iAdd)!RM.Set(V.uGlobal.uRecords(V.Local.i)!Flag_RM)
+		'PHANTOM
+		V.uGlobal.uGrid(V.Local.iAdd)!Phantom.Set(V.uGlobal.uRecords(V.Local.i)!Phantom.Trim)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+F.Intrinsic.UI.CloseWaitDialog
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("Get_Data_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Get_Data.End
+
+Program.Sub.LoadScreen.Start
+F.Intrinsic.Control.SetErrorHandler("LoadScreen_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+V.Local.I.Declare(Long)
+V.Local.irows.Declare(Long)
+V.Local.sRet.Declare(String)
+
+Gui.f_Grid.fgOps.LoadFromUDT("V.uGlobal.uGrid","FLAG::0*!*PHASE::1*!*SUFFIX::2*!*FAT::6*!*PART::7*!*DESCRIPTION::8*!*PL::9*!*QTY::11*!*PHANTOM::12*!*FLAG_INV::13*!*PROJECT_GROUP::14",0)
+F.Intrinsic.Math.Sub(V.Screen.f_Grid!fgOps.Rows,1,V.Local.irows)
+
+F.Intrinsic.Control.For(V.Local.I,1,V.Local.irows,1)
+	Gui.f_Grid.fgOps.GetTextMatrix(0,V.Local.I,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,=,"H")
+		Gui.f_Grid.fgOps.ApplyStyle(V.Local.I,2)
+		Gui.f_Grid.fgOps.TextMatrix(3,V.Local.I,V.Ambient.Date)
+	F.Intrinsic.Control.Else
+		Gui.f_Grid.fgOps.ApplyStyle(V.Local.I,3)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.I)
+
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("LoadScreen_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadScreen.End
+
+program.sub.events.start
+F.Intrinsic.Control.SetErrorHandler("events_Err")
+F.Intrinsic.Control.ClearErrors
+'ERRORHANDLINGABOVE
+'DECLAREVARIABLES
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sFlag.Declare(String)
+V.Local.sPart.Declare(String)
+V.Local.sDesc.Declare(String)
+V.Local.sPL.Declare(String)
+V.Local.sUOM.Declare(String)
+V.Local.sSource.Declare(String)
+V.Local.sParams.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.iRows.Declare(Long)
+V.Local.sTitles.Declare(String)
+V.Local.iW.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.iCol.Declare(Long)
+V.Local.sParent.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sQty.Declare(Float)
+V.Local.iRet.Declare(Long)
+
+Function.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+'
+'
+
+F.Intrinsic.Control.If(V.Args.Screen.UCase,=,"F_GRID")
+	F.Intrinsic.Control.If(V.Args.controlname.UCase,=,"FGOPS")
+		F.Intrinsic.Control.If(V.Args.EVentType.UCase,=,"COMMANDCLICK")
+
+			' ====  ROUTER BROWSE
+			F.Intrinsic.Control.If(V.Args.Column,=,5)
+				Gui.f_Grid.fgOps.GetTextMatrix(0,V.Args.Key,V.Local.sFlag)
+				F.Intrinsic.Control.If(V.Local.sFlag,=,"H")
+'					F.Intrinsic.UI.Browser(2705,"",V.Local.sRet)
+					F.Intrinsic.String.Split("Router*!*Description","*!*",V.Local.sTitles)
+					F.Intrinsic.String.Split("2000*!*3000","*!*",V.Local.iW)
+					F.Intrinsic.UI.Browser("Select a Router","Conx","SELECT ROUTER, DESCRIPTION_ROUTER FROM V_ROUTER_HEADER ORDER BY ROUTER ASC",V.Local.sTitles,V.Local.iW,V.Local.sRet)
+					F.Intrinsic.Control.If(V.local.sRet,<>,"***CANCEL***")
+						F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+						Gui.f_Grid.fgOps.TextMatrix(4,V.Args.Key,V.Local.sRet(0).Trim)
+						Gui.f_Grid.fgOps.Commit
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+
+			' ==== PL BROWSE
+			F.Intrinsic.Control.Elseif(V.args.Column,=,10)
+				Gui.f_Grid.fgOps.GetTextMatrix(0,V.Args.Key,V.Local.sFlag)
+				F.Intrinsic.Control.If(V.Local.sFlag,=,"H")
+					F.Intrinsic.UI.Browser(130,"",V.Local.sRet)
+					F.Intrinsic.Control.If(V.local.sRet,<>,"***CANCEL***")
+						F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+						Gui.f_Grid.fgOps.TextMatrix(9,V.Args.Key,V.Local.sRet(0).Trim)
+						Gui.f_Grid.fgOps.Commit
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+
+			' ==== SWAP PHANTOM/QTY
+			F.Intrinsic.Control.ElseIf(V.Args.Column,=,15)
+				Gui.f_Grid.fgOps.GetTextMatrix(0,V.Args.Key,V.Local.sFlag)
+				F.Intrinsic.Control.If(V.Local.sFlag,=,"H")
+					F.Intrinsic.UI.Msgbox("Are you sure you want to convert this parent to a purchased item? This cannot be undone without re-uploading file","Are you sure?",4,V.Local.iRet)
+					' ====YES
+					F.Intrinsic.Control.If(V.Local.iRet,=,6)
+						Gui.f_Grid..Visible(False)
+						Gui.f_Grid.fgOps.GetTextMatrix(7,V.Args.Key,V.Local.sParent)
+						F.Intrinsic.String.Build("DELETE FROM GCG_3538_LMD_WOUPL_T WHERE PARENT = '{0}' AND TRMNL = '{1}' AND JOB = '{2}' AND FLAG_HEADER = 0",V.Local.sParent,V.Caller.Terminal,V.Screen.f_Grid!txtJob.Text,V.Local.sSQL)
+						F.ODBC.Connection!CONX.Execute(V.Local.sSQL)
+						Gui.f_Grid.fgOps.GetTextMatrix(8,V.Args.Key,V.Local.sDesc)
+						Gui.f_Grid.fgOps.GetTextMatrix(11,V.Args.Key,V.Local.sQty)
+						F.ODBC.Connection!CONX.OpenLocalRecordsetRW("rstA","SELECT * FROM GCG_3538_LMD_WOUPL_T")
+						F.ODBC.CONX!rstA.AddNew
+						F.ODBC.CONX!rstA.Set!JOB(V.Screen.f_Grid!txtJob.Text)
+						F.ODBC.CONX!rstA.Set!PARENT(V.Local.sParent)
+						F.Intrinsic.String.Concat(V.Local.sParent,"*",V.Local.sPart)
+						F.ODBC.CONX!rstA.Set!PART(V.Local.sPart)
+						F.ODBC.CONX!rstA.Set!DESCRIPTION(V.Local.sDesc)
+						F.ODBC.CONX!rstA.Set!QTY(1)
+						F.ODBC.CONX!rstA.Set!FLAG_RM(0)
+						F.ODBC.CONX!rstA.Set!FLAG_HEADER(0)
+						F.ODBC.CONX!rstA.Set!TYPE("CHANGE")
+						F.ODBC.CONX!rstA.Set!TRMNL(V.Caller.Terminal)
+						F.ODBC.CONX!rstA.Update
+						F.ODBC.CONX!rstA.Close
+						F.ODBC.Connection!CONX.Close
+						gui.f_Grid..ClearGroup(1)
+						Gui.f_Grid.fgOps.Rows(1)
+						F.Intrinsic.Control.CallSub(Buildstyle)
+						F.Intrinsic.Control.CallSub(Get_data)
+						F.Intrinsic.Control.CallSub(Loadscreen)
+						Gui.f_Grid..Show
+					F.Intrinsic.Control.Else
+						F.Intrinsic.Control.ExitSub
+					F.Intrinsic.Control.EndIf
+				' ==== NO
+				F.Intrinsic.Control.Else
+					Gui.f_Grid..Visible(False)
+					V.Local.i.Set(V.Args.Key)
+					F.Intrinsic.Control.DoUntil(V.Local.sFlag,=,"H")
+						F.Intrinsic.Math.Sub(V.Local.i,1,V.Local.i)
+						Gui.f_Grid.fgOps.GetTextMatrix(0,V.Local.i,V.Local.sFlag)
+					F.Intrinsic.Control.Loop
+					Gui.f_Grid.fgOps.GetTextMatrix(7,V.Local.i,V.Local.sParent)
+					Gui.f_Grid.fgOps.GetTextMatrix(7,V.Args.Key,V.Local.sPart)
+					F.Intrinsic.String.Build("SELECT * FROM GCG_3538_LMD_WOUPL_T WHERE PARENT = '{0}' AND PART = '{1}' AND TRMNL = '{2}'  AND JOB = '{3}'",V.Local.sParent.Trim,V.Local.sPart.Trim,V.Caller.Terminal,V.Screen.f_Grid!txtJob.Text,V.Local.sSQL)
+					F.ODBC.Connection!coNX.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+					F.ODBC.CONX!rst.Set!PART(V.ODBC.CONX!rst.FieldValTrim!PHANTOM)
+					F.ODBC.CONX!rst.Set!PHANTOM(V.Local.sPart)
+					V.Local.sQty.Set(V.ODBC.CONX!rst.FieldVal!QTY)
+					F.ODBC.CONX!rst.Set!QTY(V.ODBC.CONX!rst.FieldVal!PHANTOM_QTY)
+					F.ODBC.CONX!rst.Set!PHANTOM_QTY(V.Local.sQty)
+					F.ODBC.CONX!rst.Update
+					F.ODBC.CONX!rst.Close
+					F.ODBC.Connection!CONX.Close
+					gui.f_Grid..clearGroup(1)
+					Gui.f_Grid.fgOps.Rows(1)
+					F.Intrinsic.Control.CallSub(Buildstyle)
+					F.Intrinsic.Control.CallSub(Get_data)
+					F.Intrinsic.Control.CallSub(Loadscreen)
+					Gui.f_Grid..Show
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.control.endif
+		F.Intrinsic.Control.EndIf
+'	F.Intrinsic.Control.ElseIf(V.Args.controlname.UCase,=,"CMDDUE")
+'		F.Intrinsic.Math.Sub(V.Screen.f_Grid!fgOps.Rows,1,V.Local.iRows)
+'		F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+'			Gui.f_Grid.fgOps.GetTextMatrix(0,V.Local.i,V.Local.sRet)
+'			F.Intrinsic.Control.If(V.Local.sRet,=,"H")
+'				Gui.f_Grid.fgOps.TextMatrix(3,V.Local.i,V.Screen.f_Grid!dtpDue.Value)
+'			F.Intrinsic.Control.EndIf
+'		F.Intrinsic.Control.Next(V.Local.i)
+'	F.Intrinsic.Control.ElseIf(V.Args.controlname.UCase,=,"CMDUPLOAD")
+'		F.Intrinsic.UI.Msgbox("Are you sure you want to process upload?","Confirmation",4,V.Local.i)
+'		F.Intrinsic.Control.If(V.Local.i,=,6)
+'			F.Intrinsic.Control.CallSub(Upload)
+'		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("events_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.events.End
+
+program.sub.cmdcancel_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdcancel_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.Ssql.Declare(String)
+
+F.Intrinsic.stRING.Concat("DELETE FROM GCG_3538_LMD_WOUPL_T WHERE TRMNL = '",V.Caller.Terminal,"'",V.Local.Ssql)
+F.ODBC.Connection!CONX.Execute(V.Local.Ssql)
+F.Intrinsic.Control.CallSub(F_grid_unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdcancel_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdcancel_click.End
+
+program.sub.cmddue_click.start
+
+V.Local.iRows.Declare(Long)
+V.Local.sRet.Declare(String)
+V.Local.i.Declare(Long)
+
+F.Intrinsic.Math.Sub(V.Screen.f_Grid!fgOps.Rows,1,V.Local.iRows)
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	Gui.f_Grid.fgOps.GetTextMatrix(0,V.Local.i,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,=,"H")
+		Gui.f_Grid.fgOps.TextMatrix(3,V.Local.i,V.Screen.f_Grid!dtpDue.Value)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+program.sub.cmddue_click.End
+
+program.sub.cmdupload_click.start
+
+F.Intrinsic.Control.SetErrorHandler("Upload_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+V.Local.i.Declare(Long)
+V.Local.iRows.Declare(Long)
+V.Local.sFlag.Declare(String)
+V.Local.sJob.Declare(String)
+V.Local.sSuffix.Declare(String)
+V.Local.sTempHead.Declare(String)
+V.Local.sPart.Declare(String)
+V.Local.sCustomer.Declare(String)
+V.Local.sQTY.Declare(String)
+V.Local.sDateOpen.Declare(String)
+V.Local.sDateDue.Declare(String)
+V.Local.sPL.Declare(String)
+V.Local.sDesc.Declare(String)
+V.Local.sProject.Declare(String)
+V.Local.sSeq.Declare(String)
+V.Local.sTempOps.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sUM.Declare(String)
+V.Local.sPhantom.Declare(String)
+V.Local.sOpFile.Declare(String)
+V.Local.sHeadFile.Declare(String)
+V.Local.bExists.Declare(Boolean)
+V.Local.sProjectGroup.Declare(String)
+V.Local.sPHase.Declare(String)
+V.Local.sRouter.Declare(String)
+V.Local.sParams.Declare(String)
+V.loCAL.sFAT.Declare(String)
+V.Local.sParent.Declare(String)
+V.Local.sFinalParent.Declare(String)
+V.Local.sSel.Declare(String)
+V.Local.sSortCode.Declare(String)
+
+F.Intrinsic.UI.Msgbox("Are you sure you want to process upload?","Confirmation",4,V.Local.i)
+F.Intrinsic.Control.If(V.Local.i,<>,6)
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+Gui.f_Grid..Visible(False)
+
+F.Intrinsic.Math.Sub(V.Screen.f_Grid!fgOps.Rows,1,V.Local.iRows)
+F.Intrinsic.UI.InvokeWaitDialog("Processing Upload","Please Wait")
+
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Processing Upload",V.Local.i,1,V.Local.iRows)
+	Gui.f_Grid.fgOps.GetTextMatrix(0,V.Local.i,V.Local.sFlag)
+	' ==== HEADER
+	F.Intrinsic.Control.If(V.Local.sFlag.Trim,=,"H")
+		V.Local.sSeq.Set("0")
+		Gui.f_Grid.fgOps.GetTextMatrix(2,V.Local.i,V.Local.sSuffix)
+		' job
+		F.Intrinsic.String.Rpad(V.Screen.f_Grid!txtJob.Text," ",6,V.Local.sTempHead)
+		' suffix
+		F.Intrinsic.String.LPad(V.Local.sSuffix,"0",3,V.Local.sSuffix)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sSuffix,V.Local.sTempHead)
+		' part + loc
+		Gui.f_Grid.fgOps.GetTextMatrix(7,V.Local.i,V.Local.sPart)
+		F.Intrinsic.String.Concat(V.Screen.f_Grid!txtJob.Text,"-",V.Local.sPart,V.Local.sPart)
+		F.Intrinsic.String.RPad(V.Local.sPart," ",22,V.Local.sPart)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sPart,V.Local.sTempHead)
+		' router	
+		Gui.f_Grid.fgOps.GetTextMatrix(4,V.Local.i,V.Local.sRouter)
+		F.Intrinsic.String.RPad(V.Local.sRouter," ",50,V.Local.sRouter)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sRouter,V.Local.sTempHead)
+		' customer + PO
+		F.Intrinsic.String.RPad(V.Screen.f_Grid!txtCustomer.Text," ",26,V.Local.sCustomer)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sCustomer,V.Local.sTempHead)
+		' run qt
+		Gui.f_Grid.fgOps.GetTextMatrix(11,V.Local.i,V.Local.sQTY)
+		F.Intrinsic.String.RPad(V.Local.sQTY," ",16,V.Local.sQTY)
+		' date open
+		F.Intrinsic.String.Format(V.Ambient.Date,"MMDDYY",V.Local.sDateOpen)
+		' date due + additional
+		Gui.f_Grid.fgOps.GetTextMatrix(3,V.Local.i,V.Local.sDateDue)
+		F.Intrinsic.String.Format(V.Local.sDateDue,"MMDDYY",V.Local.sDateDue)
+		F.Intrinsic.String.RPad(V.Local.sDateDue," ",188,V.Local.sDateDue)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sQTY,V.Local.sDateOpen,V.Local.sDateDue,V.Local.sTempHead)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,"00000000000.0000         ",V.Local.sTempHead)
+		Gui.f_Grid.fgOps.GetTextMatrix(9,V.Local.i,V.Local.sPL)
+		F.Intrinsic.String.RPad(V.Local.sPL," ",2,V.Local.sPL)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sPL,"00000000000.000000000000000.0000",V.Local.sTempHead)
+		Gui.f_Grid.fgOps.GetTextMatrix(8,V.Local.i,V.Local.sDesc)
+		F.Intrinsic.String.RPad(V.Local.sDesc," ",33,V.Local.sDesc)
+		F.Intrinsic.String.RPad(V.Screen.f_Grid!txtJob.Text," ",86,V.Local.sProject)
+		F.Intrinsic.String.Concat(V.Local.sTempHead,V.Local.sDesc,V.Local.sProject,V.Local.sTempHead)
+		F.Intrinsic.Control.If(V.Global.sUpHead,=,"")
+			V.Global.sUpHead.Set(V.Local.sTempHead)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat(V.Global.sUpHead,V.Ambient.NewLine,V.Local.sTempHead,V.Global.sUpHead)
+		F.Intrinsic.Control.EndIf
+	' ==== LINE
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Add(V.Local.sSeq.Long,1000,V.Local.sSeq)
+		F.Intrinsic.String.lpad(V.Local.sSeq,"0",6,V.Local.sSeq)
+		F.Intrinsic.String.RPad(V.Screen.f_Grid!txtJob.text," ",6,V.Local.sTempOps)
+		F.Intrinsic.String.Concat(V.Local.sTempOps,V.Local.sSuffix,V.Local.sSeq,V.Local.sTempOps)
+		F.Intrinsic.String.Concat(V.Local.sTempOps,"       M",V.Local.sTempOps)
+		Gui.f_Grid.fgOps.GetTextMatrix(8,V.Local.i,V.Local.sDesc)
+		F.Intrinsic.String.RPad(V.Local.sDesc," ",30,V.Local.sDesc)
+		Gui.f_Grid.fgOps.GetTextMatrix(7,V.Local.i,V.Local.sPart)
+		F.Intrinsic.String.Concat("Select UM_INVENTORY from v_INVENTORY_MSTR where Part = '",V.Local.sPart,"'",V.Local.sSQL)
+		F.ODBC.Connection!CONX.OpenLocalRecordsetRO("RST",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+			V.Local.sUM.Set(V.ODBC.CONX!rst.FieldValTrim!um_inventory)
+			F.Intrinsic.String.RPAD(V.Local.sUM," ",2,V.Local.sUM)
+		F.Intrinsic.Control.Else
+			V.Local.sUM.Set("EA")
+		F.Intrinsic.Control.EndIf
+		F.ODBC.COnx!rst.Close
+		F.Intrinsic.String.Rpad(V.Local.sPart," ",20,V.Local.sPart)
+		F.Intrinsic.String.Concat(V.Local.sTempOps,V.Local.sDesc,V.Local.sUM,V.Local.sPart,V.Local.sTempOps)
+		F.Intrinsic.String.RPad(V.Local.sTempOps," ",117,V.Local.sTempOps)
+		Gui.f_Grid.fgOps.GetTextMatrix(11,V.Local.i,V.Local.sQTY)
+		F.Intrinsic.String.RPad(V.Local.sQty," ",16,V.Local.sQTY)
+		F.Intrinsic.String.concat(V.Local.sTempOps,V.Local.sQTY,V.Local.sTempOps)
+		F.Intrinsic.String.RPad(V.Local.sTempOps," ",199,V.Local.sTempOps)
+		Gui.f_Grid.fgOps.GetTextMatrix(12,V.Local.i,V.Local.sPhantom)
+		F.Intrinsic.String.RPad(V.Local.sPhantom," ",20,V.Local.sPhantom)
+		'Insert Project Group here instead of empty 6 characters.
+		Gui.f_GRID.fgOps.GetTextMatrix(14,V.Local.i,V.Local.sProjectGroup)
+		F.Intrinsic.String.RPad(V.Local.sProjectGroup," ",6,V.Local.sProjectGroup)
+
+		F.Intrinsic.String.Concat(V.Local.sTempOps,V.Local.sPhantom,V.locAL.sProjectGroup,V.Local.sTempOps)
+		F.Intrinsic.Control.If(V.Global.sUpOps,=,"")
+			V.Global.sUpOps.Set(V.Local.sTempOps)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat(V.Global.sUpOps,V.Ambient.NewLine,V.Local.sTempOps,V.Global.sUpOps)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.String.Concat(V.Caller.FilesDir,"\JOBCOST.TXT",V.Local.sOpFile)
+F.Intrinsic.String.Concat(V.Caller.FilesDir,"\JBMDLA.TXT",V.Local.sHeadFile)
+
+F.Intrinsic.File.exists(V.Local.sOpFile,V.Local.bexists)
+F.Intrinsic.Control.If(V.Local.bExists,=,True)
+	F.Intrinsic.File.DeleteFile(V.Local.sOpFile)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.File.Exists(V.Local.sHeadFile,V.Local.bExists)
+F.Intrinsic.Control.If(V.local.bExists,=,True)
+	F.Intrinsic.File.DeleteFile(V.Local.sHeadFile)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.File.String2File(V.Local.sOpFile,V.Global.sUpOps)
+F.Intrinsic.File.String2File(V.Local.sHeadFile,V.Global.sUpHead)
+F.Global.General.CallWrapperSync(50,"UPLJBMUL/A")
+F.Global.General.CallWrapperSync(50,"UPLJOBST/A")
+
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Performing Addiional Steps (Phase, FAT, and Router Steps)",V.Local.i,1,V.Local.iRows)
+	Gui.f_Grid.fgOps.GetTextMatrix(0,V.Local.i,V.Local.sFlag)
+	F.Intrinsic.Control.If(V.Local.sFlag,=,"H")
+		Gui.f_Grid.fgOps.GetTextMatrix(1,V.Local.i,V.Local.sPhase)
+		Gui.f_Grid.fgOps.GetTextMatrix(2,V.Local.i,V.Local.sSuffix)
+		Gui.f_Grid.fgOps.GetTextMatrix(7,V.Local.i,V.Local.sSortCode)
+		' 01/13/2015 -- JCT
+		' suffix should be 0 padded
+'		F.Intrinsic.String.RPad(V.Local.sSuffix," ",3,V.Local.sSuffix)
+		F.Intrinsic.String.RPad(V.Local.sSuffix,"0",3,V.Local.sSuffix)
+		Gui.f_Grid.fgOps.GetTextMatrix(3,V.Local.i,V.Local.sDateDue)
+		Gui.f_Grid.fgOps.GetTextMatrix(6,V.Local.i,V.Local.sFAT)
+		F.Intrinsic.String.Concat("SELECT * FROM JOB_HEADER WHERE JOB = '",V.Screen.f_Grid!txtJob.Text,"' AND SUFFIX = '",V.Local.sSuffix,"'",V.Local.sSQL)
+		F.ODBC.CONNECTION!CONX.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+		F.ODBC.CONX!rst.Set!PHASE(V.Local.sPHase)
+		F.ODBC.CONX!rst.Set!CODE_SORT(V.Local.sFAT)
+		F.ODBC.CONX!rst.Update
+		F.ODBC.CONX!rst.Close
+
+		Gui.f_Grid.fgOps.GetTextMatrix(4,V.Local.i,V.Local.sRouter)
+		Gui.f_Grid.fgOps.GetTextMatrix(7,V.Local.i,V.local.sParent)
+		F.Intrinsic.String.RPad(V.Local.sParent," ",20,V.Local.sParent)
+		F.Intrinsic.Control.If(V.Local.sRouter.Trim,<>,"")
+			V.Global.sUpOps.Set("")
+			F.Intrinsic.String.bUILD("SELECT TOP 1 SEQ FROM V_JOB_OPERATIONS WHERE JOB = '{0}' AND SUFFIX = '{1}' ORDER BY SEQ DESC",V.Screen.f_Grid!txtJob.Text,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+				F.Intrinsic.String.LPad(V.ODBC.CONX!rst.FieldValTrim!SEQ,"0",6,V.Local.sSeq)
+			F.Intrinsic.Control.Else
+				V.Local.sSeq.Set("0")
+			F.Intrinsic.Control.EndIf
+			F.ODBC.CONX!rst.Close
+			F.Intrinsic.String.Concat("SELECT * FROM V_ROUTER_LINE WHERE ROUTER = '",V.Local.sRouter.Trim,"' AND LMO IN ('L','O', 'C') ORDER BY LINE_ROUTER ASC",V.Local.sSQL)
+			F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+				F.Intrinsic.Control.DoUntil(V.ODBC.CONX!rst.EOF,=,True)
+					F.Intrinsic.Math.Add(V.Local.sSEQ,1000,V.Local.sSEQ)
+					F.Intrinsic.String.LPad(V.Local.sSEQ,"0",6,V.Local.sSEQ)
+					F.Intrinsic.String.RPad(V.Screen.f_Grid!txtJob.Text," ",6,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.Local.sSuffix,V.local.sSeq,V.ODBC.CONX!rst.FieldValTrim!OPERATION,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",21,V.Local.sTempOps)
+					F.Intrinsic.Control.If(V.ODBC.CONX!rst.FieldVal!SET_UP,>,0)
+						F.Intrinsic.String.Concat(V.Local.sTempOps,"Y",V.Local.sTempOps)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Concat(V.Local.sTempOps," ",V.Local.sTempOps)
+					F.Intrinsic.Control.EndIf
+					' Task needs to be   = T
+					F.Intrinsic.Control.If(V.ODBC.CONX!rst.FieldValTrim!Flag_Main_Comment,=,"T")
+						F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!Flag_Main_Comment,V.ODBC.CONX!rst.FieldValTrim!DESC_RT_LINE,V.Local.sTempOps)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!LMO,V.ODBC.CONX!rst.FieldValTrim!DESC_RT_LINE,V.Local.sTempOps)
+					F.Intrinsic.Control.EndIf
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",53,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!UM_INVENTORY,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",55,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!PART_WC_OUTSIDE,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",75,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!ROUTER,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",95,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!LINE_ROUTER,V.ODBC.CONX!rst.FieldValTrim!SET_UP,V.LOCAL.StEMPoPS)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",117,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!RUN_TIME,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",149,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!LEAD_TIME,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",199,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.Local.sSortCode,V.Local.sTempOps)
+'					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!SORT_CODE,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",219,V.Local.sTempOps)
+					F.Intrinsic.String.Concat(V.Local.sTempOps,V.ODBC.CONX!rst.FieldValTrim!PROJ_GROUP,V.Local.sTempOps)
+					F.Intrinsic.String.RPad(V.Local.sTempOps," ",251,V.Local.sTempOps)
+
+					F.Intrinsic.Control.If(V.Global.sUpOps,=,"")
+						V.Global.sUpOps.Set(V.Local.sTempOps)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Concat(V.Global.sUpOps,V.Ambient.NewLine,V.Local.sTempOps,V.Global.sUpOps)
+					F.Intrinsic.Control.EndIf
+
+				F.ODBC.CONX!rst.MoveNext
+				F.Intrinsic.Control.Loop
+				F.ODBC.CONX!rst.Close
+				F.Intrinsic.File.exists(V.Local.sOpFile,V.Local.bexists)
+				F.Intrinsic.Control.If(V.Local.bExists,=,True)
+					F.Intrinsic.File.DeleteFile(V.Local.sOpFile)
+				F.Intrinsic.Control.EndIf
+				F.Intrinsic.File.String2File(V.Local.sOpFile,V.Global.sUpOps)
+				F.Global.General.CallWrapperSync(50,"UPLJOBST/A")
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+
+		' update task signoff
+		F.Intrinsic.String.Concat("SELECT * FROM V_ROUTER_LINE WHERE ROUTER = '",V.Local.sRouter.Trim,"' AND LMO ='L'  and Part_WC_Outside = 'TASK' ORDER BY LINE_ROUTER ASC",V.Local.sSQL)
+		F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+			F.Intrinsic.Control.DoUntil(V.ODBC.CONX!rst.EOF,=,True)
+				F.Intrinsic.String.Build("Update Job_Operations set Task_Signoff_User = '{0}', Task_Signoff_Type = '{1}' ,Task_Comp_Req = '{2}'",V.ODBC.CONX!rst.FieldVal!Signoff_GrpUsr,V.ODBC.CONX!rst.FieldVal!Signoff_Type,V.ODBC.CONX!rst.FieldVal!Tooling_Seq,V.Local.sSel)
+				F.Intrinsic.String.Build("{0} where Router = '{1}' and Router_Seq = '{2}' ",V.Local.sSel,V.Local.sRouter.Trim,V.ODBC.CONX!rst.FieldVal!Line_Router,V.Local.sSel)
+				F.ODBC.Connection!CONX.Execute(V.Local.sSel)
+			F.ODBC.CONX!rst.MoveNext
+			F.Intrinsic.Control.Loop
+		F.ODBC.CONX!rst.Close
+
+		F.Intrinsic.String.FORMAT(V.Local.sDateDue,"yymmdd",V.Local.sDateDue)
+		F.Intrinsic.String.Concat("!*!",V.Local.sDateDue,"!*!",V.Screen.f_Grid!txtJob.Text,"!*!",V.Local.sSuffix,"!*!!*!B",V.Local.sparams)
+		' ===Schedule Job
+		F.Global.General.callwrappersync(500030,V.Local.sParams)
+		F.Intrinsic.String.Concat(V.Screen.f_Grid!txtJob.Text,"!*!",V.Local.sSuffix,"!*!O",V.Local.sParams)
+'		' ====?????=====
+		F.Global.General.CallWrapperSync(2009,V.Local.sParams)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.UI.CloseWaitDialog
+F.Intrinsic.String.Concat("DELETE FROM GCG_3538_LMD_WOUPL_T WHERE TRMNL ='",V.Caller.Terminal,"'",V.Local.sSQL)
+F.ODBC.Connection!CONX.Execute(V.Local.sSQL)
+F.ODBC.Connection!CONX.Close
+F.Intrinsic.Control.End
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("Upload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_LMD_WO_UPL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdupload_click.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$$}$12:00:00 AM$}$False
+Program.Sub.Comments.End

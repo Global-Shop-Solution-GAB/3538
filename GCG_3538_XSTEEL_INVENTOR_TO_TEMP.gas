@@ -1,0 +1,990 @@
+Program.Sub.ScreenSU.Start
+Gui.f_Select..Create
+Gui.f_Select..Caption("File Type Selection")
+Gui.f_Select..Size(3335,1455)
+Gui.f_Select..Position(0,0)
+Gui.f_Select..AlwaysOnTop(False)
+Gui.f_Select..FontName("Arial")
+Gui.f_Select..FontSize(8)
+Gui.f_Select..ForeColor(0)
+Gui.f_Select..Backcolor(15790320)
+Gui.f_Select..ControlBox(True)
+Gui.f_Select..MaxButton(False)
+Gui.f_Select..MinButton(True)
+Gui.f_Select..MousePointer(0)
+Gui.f_Select..Moveable(True)
+Gui.f_Select..Sizeable(False)
+Gui.f_Select..ShowInTaskBar(True)
+Gui.f_Select..TitleBar(True)
+Gui.f_Select..Event(unload,Events)
+Gui.f_Select.lbl_ddlType.Create(label)
+Gui.f_Select.lbl_ddlType.Caption("Please select a file type")
+Gui.f_Select.lbl_ddlType.Visible(True)
+Gui.f_Select.lbl_ddlType.Size(1800,200)
+Gui.f_Select.lbl_ddlType.Zorder(1)
+Gui.f_Select.lbl_ddlType.Position(100,135)
+Gui.f_Select.lbl_ddlType.Enabled(True)
+Gui.f_Select.lbl_ddlType.Alignment(0)
+Gui.f_Select.lbl_ddlType.FontName("Arial")
+Gui.f_Select.lbl_ddlType.FontSize(8)
+Gui.f_Select.lbl_ddlType.Backcolor(15790320)
+Gui.f_Select.lbl_ddlType.BorderStyle(0)
+Gui.f_Select.lbl_ddlType.Tooltip("")
+Gui.f_Select.ddlType.Create(dropdownlist)
+Gui.f_Select.ddlType.Visible(True)
+Gui.f_Select.ddlType.Size(1800,330)
+Gui.f_Select.ddlType.Zorder(0)
+Gui.f_Select.ddlType.Position(100,335)
+Gui.f_Select.ddlType.Enabled(True)
+Gui.f_Select.ddlType.FontName("Arial")
+Gui.f_Select.ddlType.FontSize(7)
+Gui.f_Select.ddlType.TabStop(True)
+Gui.f_Select.ddlType.TabIndex(1)
+Gui.f_Select.ddlType.Tooltip("")
+Gui.f_Select.cmdSelect.Create(button)
+Gui.f_Select.cmdSelect.Caption("Select")
+Gui.f_Select.cmdSelect.Visible(True)
+Gui.f_Select.cmdSelect.Size(1000,330)
+Gui.f_Select.cmdSelect.Zorder(0)
+Gui.f_Select.cmdSelect.Position(1985,335)
+Gui.f_Select.cmdSelect.Enabled(True)
+Gui.f_Select.cmdSelect.FontName("Arial")
+Gui.f_Select.cmdSelect.FontSize(7)
+Gui.f_Select.cmdSelect.TabStop(True)
+Gui.f_Select.cmdSelect.TabIndex(2)
+Gui.f_Select.cmdSelect.Tooltip("")
+Gui.f_Select.cmdSelect.Event(click,Events)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uHeader.Define("Job",String,Job)
+Variable.UDT.uHeader.Define("Parent",String,Parent)
+Variable.UDT.uHeader.Define("Parent_Desc",String,Parent_Desc)
+Variable.UDT.uHeader.Define("Parent_Qty",Float,Parent_Qty)
+Variable.UDT.uHeader.Define("TRMNL",String,TRMNL)
+Variable.UDT.uHeader.Define("FLAG_HEADER",Boolean,FLAG_HEADER)
+Variable.UDT.uHeader.Define("Type",String,Type)
+Variable.UDT.uHeader.Define("FAT",String,FAT)
+Variable.uGlobal.uHeader.Declare("uHeader")
+Variable.UDT.uOps.Define("Job",String,Job)
+Variable.UDT.uOps.Define("Parent",String,Parent)
+Variable.UDT.uOps.Define("TRMNL",String,TRMNL)
+Variable.UDT.uOps.Define("Flag_Header",Boolean,Flag_Header)
+Variable.UDT.uOps.Define("Part",String,Part)
+Variable.UDT.uOps.Define("Description",String,Description)
+Variable.UDT.uOps.Define("Qty",Float,Qty)
+Variable.UDT.uOps.Define("Type",String,Type)
+Variable.UDT.uOps.Define("Flag_RM",Boolean,Flag_RM)
+Variable.UDT.uOps.Define("Phantom",String,Phantom)
+Variable.UDT.uOps.Define("Phantom_Qty",Float,Phantom_Qty)
+Variable.uGlobal.uOps.Declare("uOps")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sSQL.Declare(String)
+
+'VERIFY USER HAS NO RECORDS PENDING UPLOAD.
+F.Intrinsic.String.Concat("SELECT * FROM GCG_3538_LMD_WOUPL_T WHERE TRMNL = '",V.Caller.Terminal,"'",V.Local.sSQL)
+F.ODBC.Connection!CONX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass,7200)
+F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rstLockVerify",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.CONX!rstLockVerify.EOF,=,False)
+	F.Intrinsic.UI.Msgbox("You have records pending upload, and cannot read new files until the existing records have been processed.","Other Uploads Exist")
+	F.ODBC.CONX!rstLockVerify.Close
+	F.ODBC.Connection!CONX.Close
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.EndIf
+F.ODBC.CoNX!rstLockVerify.Close
+F.ODBC.Connection!CONX.Close
+
+'INITIALIZE DROP DOWN LIST ITEMS
+Gui.f_Select.ddlType.AddItem("XSteel",0)
+Gui.f_Select.ddlType.AddItem("Inventor",1)
+Gui.f_Select.ddlType.ListIndex(0)
+
+'SHOW FORM
+Gui.f_Select..Show
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.Events.start
+F.Intrinsic.Control.SetErrorHandler("Events_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+Gui.f_Select..Visible(False)
+
+F.Intrinsic.Control.If(V.Args.Screen.UCase,=,"F_SELECT")
+F.Intrinsic.Control.AndIf(V.Args.EventType.UCase,=,"UNLOAD")
+	F.Intrinsic.control.End
+
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.if(V.Args.ControlName.UCase,=,"CMDSELECT")
+	V.Local.sRet.Declare(String)
+	F.Intrinsic.Control.If(V.Screen.f_Select!ddlType.ListIndex,=,0)
+		F.Intrinsic.UI.ShowOpenFileDialog("*.xsr",".XSR",V.Caller.GlobalDir,V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+			F.Intrinsic.Control.CallSub("ReadXSteel","File",V.Local.sRet)
+			F.Intrinsic.Control.CallSub(Calluploadscreen)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.ElseIf(V.Screen.f_Select!ddlType.ListIndex,=,1)
+		F.Intrinsic.UI.ShowOpenFileDialog("*.xls",".XLS",V.Caller.GlobalDir,V.local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+			F.Intrinsic.Control.CallSub("ReadInventor","File",V.Local.sRet)
+			F.Intrinsic.Control.CallSub(Calluploadscreen)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("Events_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.Events.End
+
+Program.Sub.ReadXSteel.Start
+F.Intrinsic.Control.SetErrorHandler("ReadXSteel_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+V.Local.ReadFile.Declare(String)
+V.Local.SplitString.Declare(String)
+V.Local.LoopCount.Declare(Long)
+V.Local.Seperator4Chars.Declare(String)
+V.Local.ParentStart.Declare(Long)
+V.Local.ChildrenStart.Declare(Long)
+V.Local.ChildrenStop.Declare(Long)
+V.Local.sSql.Declare(String)
+V.Local.PartMissing.Declare(String)
+V.Local.ptemp.Declare(String)
+V.Local.ParentPos.Declare(String)
+V.Local.ChildrenPos.Declare(String)
+V.Local.ParentLen.Declare(String)
+V.Local.ChildrenLen.Declare(String)
+V.Local.CurrentChild.Declare(Long)
+V.Local.Childrendata.Declare(String)
+V.Local.x.Declare(Long)
+V.Local.temparray.Declare(String)
+V.Local.ubound.Declare(Long)
+V.Local.BOMLOAD.Declare(String)
+V.Local.user.Declare(String)
+V.Local.filename.Declare(String)
+V.Local.filedir.Declare(String)
+V.Local.ldprogram.Declare(String)
+V.Local.LDDRAW.Declare(String)
+V.Local.ParentData.Declare(String)
+V.Local.PartData.Declare(String)
+V.Local.isPL.Declare(String)
+V.Local.qty.Declare(String)
+V.Local.childsort.Declare(String)
+V.Local.desc.Declare(String)
+V.Local.subtemp.Declare(Long)
+V.Local.temp.Declare(String)
+V.Local.job.Declare(String)
+V.Local.job20.Declare(String)
+V.Local.jobDESC.Declare(String)
+V.Local.suffix.Declare(String)
+V.Local.suffix2.Declare(String)
+V.Local.loadchild.Declare(String)
+V.Local.schar.Declare(String)
+V.Local.lchar.Declare(Long)
+V.Local.tempdesc.Declare(String)
+V.Local.sCombinedFiles.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sVal.Declare(String)
+V.Local.sTEMP.Declare(String)
+V.Local.iHndl.Declare(Long)
+V.Local.bInstr.Declare(Boolean)
+V.Local.iHead.Declare(Long)
+V.Local.iOPS.Declare(Long)
+V.uGlobal.uOps.Redim(-1,-1)
+V.uGlobal.uHeader.Redim(-1,-1)
+V.Local.iHead.Set(-1)
+V.Local.iOPS.SET(-1)
+V.Local.sParent.Declare(String)
+V.Local.LoopCount.Set(0)
+
+F.Intrinsic.UI.InvokeWaitDialog("Reading File, Uploading to Temp Table")
+F.ODBC.Connection!conn.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPASS,7200)
+' read the file, locally
+Function.Intrinsic.File.File2String(V.args.file,Variable.Local.ReadFile)
+
+' split out each line
+Function.Intrinsic.String.Split(Variable.Local.ReadFile,Variable.Ambient.NewLine,Variable.Local.SplitString)
+
+' Description
+F.Intrinsic.String.Mid(V.Local.SplitString(3),16,30,V.Local.jobDESC)
+F.Intrinsic.String.RPad(V.Local.jobDESC.Trim," ",30,V.Local.jobDESC)
+
+' Job
+F.Intrinsic.String.Mid(V.Local.SplitString(4),14,5,V.Local.job)
+
+'Drawing Parent
+F.Intrinsic.String.RPad(V.Local.job20.Trim," ",20,V.Local.job20)
+
+' do until last line
+Function.Intrinsic.Control.DoUntil(Variable.Local.LoopCount,=,Variable.Local.SplitString.UBound)
+
+	'Find the Starting Location of the Parent and Children.
+	Function.Intrinsic.Control.DoUntil(Variable.Local.LoopCount,=,Variable.Local.SplitString.UBound)
+
+		' read the lef 4 characters to try to determine where the data starts
+		Function.Intrinsic.String.Left(Variable.Local.SplitString(Variable.Local.LoopCount),4,Variable.Local.Seperator4Chars)
+
+		' the parent line will be immediate following the spaced dashline
+		Function.Intrinsic.Control.If(Variable.Local.Seperator4Chars,=,"- - ")
+			Variable.Local.ParentStart.Set(Variable.Local.LoopCount)
+			Function.Intrinsic.Math.Add(Variable.Local.ParentStart,1,Variable.Local.ParentStart)
+			Function.Intrinsic.Math.Add(Variable.Local.ParentStart,1,Variable.Local.ChildrenStart)
+		Function.Intrinsic.Control.EndIf
+
+		' increment the loopcount and read next line
+		Function.Intrinsic.Math.Add(Variable.Local.LoopCount,1,Variable.Local.LoopCount)
+		Function.Intrinsic.String.Left(Variable.Local.SplitString(Variable.Local.LoopCount),4,Variable.Local.Seperator4Chars)
+
+		'Find the sub Location of the last Child of the BOM
+		Function.Intrinsic.Control.If(Variable.Local.Seperator4Chars,=,"- - ")
+		Function.Intrinsic.Control.AndIf(Variable.Local.ChildrenStart,>,0)
+			Function.Intrinsic.Math.Sub(Variable.Local.LoopCount,0,Variable.Local.ChildrenStop)
+			Function.Intrinsic.Control.ExitDo
+		Function.Intrinsic.Control.EndIf
+
+		'Find the Location of the last Child of the BOM
+		Function.Intrinsic.Control.If(Variable.Local.Seperator4Chars,=,"----")
+		Function.Intrinsic.Control.AndIf(Variable.Local.ChildrenStart,>,0)
+			Function.Intrinsic.Math.Sub(Variable.Local.LoopCount,0,Variable.Local.ChildrenStop)
+			Function.Intrinsic.Control.ExitDo
+		Function.Intrinsic.Control.EndIf
+	Function.Intrinsic.Control.Loop
+
+	'Positions of Parent Data.
+	' Mark *!* Qty. *!* Profile *!*FAT*!*GRADE*!* Length *!* Unit wt *!* Ext wt
+	Function.Intrinsic.String.Split("1*!*8*!*13*!*35*!*96*!*112*!*130*!*139","*!*",V.Local.ParentPos)
+
+	'Positions of Children Data
+	' Mark *!* Qty. *!* Profile *!* Length *!* Unit wt *!* Ext wt *!* Area
+	F.Intrinsic.String.Split("1*!*8*!*13*!*35*!*96*!*112*!*133*!*147","*!*",V.Local.ChildrenPos)
+
+	'Lengths for Parents and Children
+	Function.Intrinsic.String.Split("7*!*3*!*20*!*12*!*20*!*15*!*8*!*8","*!*",Variable.Local.ParentLen)
+	Function.Intrinsic.String.Split("7*!*3*!*17*!*20*!*15*!*20*!*6*!*11","*!*",Variable.Local.ChildrenLen)
+
+	' split the line appropriately
+	Function.Intrinsic.String.PositionalSplit(Variable.Local.SplitString(Variable.Local.ParentStart),Variable.Local.ParentPos,Variable.Local.ParentLen,Variable.Local.ParentData)
+
+	'Load Parent
+	F.Intrinsic.Control.If(V.uGlobal.uHeader.UBound,=,-1)
+		V.Local.iHead.set(0)
+		V.uGlobal.uHeader.Redim(0,0)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Add(V.Local.iHead,1,V.Local.iHead)
+		V.uGlobal.uHeader.RedimPreserve(0,V.local.iHead)
+	F.Intrinsic.Control.EndIf
+
+	'Job
+	V.uGlobal.uHeader(v.Local.iHead)!Job.Set(V.Local.Job)
+	'Parent
+	V.uGlobal.uHeader(V.Local.iHead)!Parent.Set(V.Local.ParentData(0).Trim)
+	'Parent Description
+	V.uGlobal.uHeader(v.Local.iHead)!Parent_Desc.Set(V.Local.ParentData(2).Trim)
+	'Parent Qty
+	V.uGlobal.uHeader(v.Local.iHead)!Parent_Qty.Set(V.Local.ParentData(1).Trim)
+	'FAT
+	F.Intrinsic.String.Replace(V.Local.ParentData(3).Trim,"(","",V.Local.ParentData(3))
+	F.Intrinsic.String.Replace(V.Local.ParentData(3).Trim,")","",V.uGlobal.uHeader(V.local.ihead)!FAT)
+	'Drawing Children
+	Variable.Local.CurrentChild.Set(Variable.Local.ChildrenStart)
+	'Add Children BOMs
+	Function.Intrinsic.Control.DoUntil(Variable.Local.CurrentChild,=,Variable.Local.ChildrenStop)
+		Function.Intrinsic.String.PositionalSplit(Variable.Local.SplitString(Variable.Local.CurrentChild),Variable.Local.ChildrenPos,Variable.Local.ChildrenLen,Variable.Local.ChildrenData)
+		F.Intrinsic.Control.If(V.Local.iOPS,=,-1)
+			V.uGlobal.uOps.Redim(0,0)
+			V.Local.iOPS.Set(0)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Math.Add(V.Local.iOPS,1,V.Local.iOPS)
+			V.uGlobal.uOps.RedimPreserve(0,V.Local.iOPS)
+		F.Intrinsic.Control.EndIf
+
+		'Job
+		V.uGlobal.uOps(v.Local.iOPS)!Job.Set(V.Local.job)
+		'Parent
+		V.uGlobal.uOps(v.Local.iOPS)!Parent.Set(V.Local.ParentData(0).Trim)
+		'Phantom
+		V.uGlobal.uOps(v.Local.iOPS)!Phantom.Set(V.Local.Childrendata(0).Trim)
+		'Phantom Qty
+		V.uGlobal.uOps(v.Local.iOPS)!Phantom_Qty.Set(V.Local.ChildrenData(1).trim)
+'1/14/16 SAS moved outside of below if statement so it is applied even if it has a part
+		'change length into a float
+		F.Intrinsic.Control.If(V.Local.Childrendata(5).Trim,<>,"")
+			F.Intrinsic.Control.CallSub(Length,"LEN",V.Local.Childrendata(5).Trim)
+			V.Local.Childrendata(5).Set(V.Args.LEN)
+		F.Intrinsic.Control.EndIf
+		'Raw Material?
+		F.Intrinsic.Control.If(V.Local.Childrendata(2).Trim,=,"")
+			'Create part from Description using X as a Deliminator
+			V.local.desc.set(V.local.Childrendata(3))
+			F.Intrinsic.String.Concat(V.Ambient.DblQuote,"X",V.Local.ptemp)
+			F.Intrinsic.String.Split(V.Local.desc,V.Local.ptemp,V.Local.PartData)
+			V.uGlobal.uOps(v.Local.iOPS)!Part.Set(V.Local.PartData(0).Trim)
+			V.local.ptemp.set(V.Local.desc)
+			V.Local.desc.Set(V.local.Childrendata(3).trim)
+
+'1/14/16 SAS moving outside of the if so it always gets applied
+'			F.Intrinsic.Control.If(V.Local.Childrendata(5).Trim,<>,"")
+'				F.Intrinsic.Control.CallSub(Length,"LEN",V.Local.Childrendata(5).Trim)
+'				V.Local.Childrendata(5).Set(V.Args.LEN)
+'			F.Intrinsic.Control.EndIf
+
+			'Use QTY or Area	  If Area is 0 then default to qty
+			F.Intrinsic.String.left(V.local.Desc.Trim,2,V.Local.isPL)
+
+			' For raw material, parts that begin with PL are based on square footage
+			F.Intrinsic.Control.If(V.Local.isPL,=,"PL")
+
+				' if area is ont blank, call sub to get qty based on calculation (per quote 4725: quantity x width (in inches)  x (12 x length)  / 144)
+				F.Intrinsic.Control.CallSub("CalculatePL","QTY",V.Local.Childrendata(1),"sPart",V.local.Desc,"Length",V.Local.Childrendata(5))
+				V.uGlobal.uOps(v.Local.iopS)!Qty.Set(V.Args.fQty)
+
+			' Other raw material items are calculated quantity x length = LF required for the job
+			F.Intrinsic.Control.Else
+
+				' RM Qty will be determined by UM
+				F.Intrinsic.String.Replace(V.Local.Childrendata(3),"'","''",V.Local.sVal)
+				F.Intrinsic.String.Concat("select UM_Inventory from Inventory_Mstr where part='",V.Local.sVal,"' ",V.Local.sSql)
+				F.ODBC.Connection!Conn.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+				F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+				F.Intrinsic.Control.If(V.Local.sRet(0).Trim,=,"EA")
+					V.uGlobal.uOps(v.Local.iOPS)!Qty.Set(V.Local.Childrendata(1).Trim)
+				F.Intrinsic.Control.ElseIf(V.Local.sRet(0).Trim,=,"FT")
+					V.uGlobal.uOps(v.Local.iOPS)!Qty.Set(V.Local.Childrendata(5).Trim)
+					F.Intrinsic.Math.Mult(V.uglobal.uOps(v.Local.iOPS)!Qty.Float,V.Local.Childrendata(1).Float,V.uGlobal.uOps(v.Local.iOPS)!Qty)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Mult(V.Local.Childrendata(1).Float,V.Local.Childrendata(5),V.uGlobal.uOps(v.Local.iOPS)!Qty)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.EndIf
+			V.uGlobal.uOps(v.Local.iOPS)!Flag_RM.Set(True)
+'====================
+		' see if there is a Buyout; if there is add lines for it
+		F.Intrinsic.Control.Else
+			V.uGlobal.uOps(v.Local.iOPS)!Part.Set(V.Local.Childrendata(2).Trim)
+'1/14/16 SAS needs to still check the UM to figure out the correct Qty
+			f.Intrinsic.String.Build("SELECT UM_INVENTORY FROM INVENTORY_MSTR WHERE PART = '{0}' ",V.Local.Childrendata(2).PSQLFriendly,V.Local.sSql)
+			F.ODBC.Connection!conn.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.If(V.Local.sRet(0).Trim,=,"EA")
+				V.uGlobal.uOps(v.Local.iOPS)!Qty.Set(V.Local.Childrendata(1).Trim)
+			F.Intrinsic.Control.ElseIf(V.Local.sRet(0).Trim,=,"FT")
+				V.uGlobal.uOps(V.Local.iOPS)!Qty.Set(V.Local.Childrendata(5).Trim)
+				F.Intrinsic.Math.Mult(V.uGlobal.uOps(V.Local.iOPS)!Qty.Float,V.Local.Childrendata(1).Float,V.uGlobal.uOps(V.Local.iOPS)!Qty)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Math.Mult(V.Local.Childrendata(1).Float,V.Local.Childrendata(5),V.uGlobal.uOps(V.Local.iOPS)!Qty)
+			F.Intrinsic.Control.EndIf
+			V.uGlobal.uOps(v.Local.iOPS)!Flag_RM.Set(False)
+		F.Intrinsic.Control.EndIf
+		Function.Intrinsic.Math.Add(Variable.Local.CurrentChild,"1",Variable.Local.CurrentChild)
+	Function.Intrinsic.Control.Loop
+
+	Function.Intrinsic.Control.If(Variable.Local.Seperator4Chars,=,"----")
+		F.Intrinsic.Control.ExitDo
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Loop
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uHeader!TRMNL,V.Caller.Terminal)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uHeader!Type,"XSTEEL")
+F.Intrinsic.Variable.UDTSetmemberValue(V.uGlobal.uHeader!FLAG_HEADER,True)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uOps!TRMNL,V.Caller.Terminal)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uOps!Flag_Header,False)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uOps!Type,"XSTEEL")
+
+F.ODBC.connection!conn.OpenLocalRecordsetRW("rstSave","SELECT * FROM GCG_3538_LMD_WOUPL_T")
+F.Intrinsic.Variable.SaveUDTToRecordset("Conn","rstSave","V.uGlobal.uHeader")
+F.Intrinsic.Variable.saveudttorecordset("Conn","rstSave","V.uGlobal.uOps")
+F.ODBC.conn!rstSave.Close
+
+F.ODBC.connection!conn.Close
+
+
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("ReadXSteel_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.ReadXSteel.End
+
+Program.Sub.ReadInventor.Start
+F.Intrinsic.Control.SetErrorHandler("ReadInventor_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+V.local.sPath.Declare(String)
+V.Local.sPath.Set(V.Args.File)
+V.Local.sData.Declare(String)
+V.local.i.Declare(Long)
+V.Local.sRowSplit.Declare(String)
+V.Local.sL.Declare(String)
+V.Local.iC.Declare(Long)
+V.Local.sParent.Declare(String)
+V.Local.sJob.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iHeader.Declare(Long)
+V.Local.iOp.Declare(Long)
+V.Local.sTemp.Declare(String)
+V.Local.sTemp2.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+
+V.uGlobal.uHeader.Redim(-1,-1)
+V.uGlobal.uOps.Redim(-1,-1)
+F.ODBC.connection!CONX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass,7200)
+'F.Intrinsic.UI.Browser(2000,"",V.Local.sRet)
+F.Intrinsic.String.Split("Project*!*Decsription*!*Customer","*!*",V.Local.sTitles)
+F.Intrinsic.String.Split("1500*!*2500*!*1500","*!*",V.Local.iWidths)
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser("Select Project","CONX","select left(Project,5) as Project, Descr, Customer from v_Project_Master order by Project",V.Local.sTitles,V.Local.iWidths,8000,8000,V.Local.sRet)
+F.Intrinsic.contROL.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.UI.Msgbox("You must select a Project to continue")
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	V.Local.sJob.Set(V.Local.sRet(0).Trim)
+F.Intrinsic.Control.EndIf
+'V.Local.sJob.Set("13175")
+F.Automation.MSExcel.ReadSpreadsheet(V.Local.sPath,V.Local.sData)
+F.Intrinsic.String.Split(V.Local.sData,"$!$",V.Local.sData)
+F.Intrinsic.UI.InvokeWaitDialog("Reading File, Uploading to Temp Table")
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.sData.UBound,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Reading File, Uploading to Temp Table",V.Local.i,1,V.Local.sData.UBound)
+	V.Local.sRowSplit.Redim(0,0)
+	F.Intrinsic.String.Split(V.Local.sData(v.Local.i),"*!*",V.Local.sRowSplit)
+	F.Intrinsic.String.Left(V.Local.sRowSplit(0),1,V.Local.sL)
+	F.Intrinsic.Control.If(V.Local.sL,=,V.Local.sL.UCase)
+		'Record is a Parent
+		F.Intrinsic.Control.If(V.uGlobal.uHeader.UBound,=,-1)
+			V.Local.iHeader.Set(0)
+			V.uglobal.uHeader.Redim(0,0)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Math.Add(V.local.iheader,1,V.local.iheader)
+			V.uGlobal.uHeader.RedimPreserve(0,V.Local.iHeader)
+		F.Intrinsic.Control.EndIf
+		V.uGlobal.uHeader(v.Local.iHeader)!Job.Set(V.Local.sJob)
+		V.uGlobal.uHeader(v.Local.iHeader)!Parent.Set(V.Local.sRowSplit(0).Trim)
+		V.Local.sParent.Set(V.Local.sRowSplit(0).Trim)
+		V.uGlobal.uHeader(v.Local.iHeader)!Parent_Desc.Set(V.Local.sRowSplit(2).Trim)
+		V.uGlobal.uHeader(v.Local.iHeader)!Parent_Qty.Set(V.Local.sRowSplit(1).Trim)
+		V.uGlobal.uHeader(v.Local.iHeader)!FAT.Set(V.Local.sRowSplit(8).Trim)
+	F.Intrinsic.Control.Else
+		'Record is a Child
+		F.Intrinsic.Control.If(V.uGlobal.uOps.UBound,=,-1)
+			V.Local.iOp.Set(0)
+			V.uglobal.uOps.Redim(0,0)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Math.Add(V.Local.iOp,1,V.local.iOp)
+			V.uGlobal.uOps.RedimPreserve(0,V.Local.iOp)
+		F.Intrinsic.Control.EndIf
+		V.uGlobal.uOps(v.Local.iOp)!Parent.Set(V.Local.sParent)
+		V.uGlobal.uOps(v.Local.iOp)!Job.Set(V.Local.sJob)
+		V.uGlobal.uOps(v.Local.iOp)!Part.Set(V.Local.sRowSplit(2).Trim)
+		V.uGlobal.uOps(v.Local.iOp)!Flag_RM.Set(True)
+		V.uGlobal.uOps(v.Local.iOp)!Phantom.Set(V.Local.sRowSplit(0).Trim)
+		V.uglobal.uOps(v.Local.iOp)!phantom_Qty.set(V.Local.sRowSplit(1).Trim)
+		F.Intrinsic.Control.CallSub(Convertfractions,"Width",V.Local.sRowSplit(4).Trim,"Length",V.Local.sRowSplit(5).Trim)
+		F.Intrinsic.String.Left(V.Local.sRowSplit(2).Trim,2,V.Local.sL)
+		F.Intrinsic.Control.If(V.Local.sL,=,"PL")
+			F.Intrinsic.Math.Mult(V.Local.sRowSplit(1).Float,V.Args.width,V.Local.sTemp)
+			F.Intrinsic.Math.Mult(V.Args.length,12,V.Local.sTemp2)
+			F.Intrinsic.Math.Mult(V.local.sTemp,V.local.sTemp2,V.local.sTemp)
+			F.Intrinsic.Math.Div(V.Local.sTemp,144,V.Local.sTemp)
+			F.Intrinsic.Math.Div(V.Local.sTemp,12,V.uGlobal.uOps(v.Local.iOp)!Qty)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat("SELECT UM_INVENTORY FROM V_INVENTORY_MSTR WHERE PART = '",V.Local.sRowSplit(2).Trim,"'",V.Local.ssql)
+			F.ODBC.Connection!CONX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.CONX!rst.EOF,=,False)
+				F.Intrinsic.CONTROL.If(V.ODBC.CONX!rst.FieldValTrim!um_inventory,=,"EA")
+					V.uGlobal.uOps(V.Local.iOp)!Qty.Set(V.Local.sRowSplit(1).Trim)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.mult(V.args.length,V.Local.sRowSplit(1).Trim,V.uGlobal.uOps(v.local.iop)!Qty)
+					F.Intrinsic.Math.Div(V.uGlobal.uOps(v.Local.iOp)!Qty,12,V.uGlobal.uOps(v.Local.iOp)!Qty)
+				F.Intrinsic.Control.Endif
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Math.mult(V.Args.length,V.Local.sRowSplit(1).Trim,V.uGlobal.uOps(v.local.iop)!Qty)
+				F.Intrinsic.Math.Div(V.uGlobal.uOps(v.Local.iOp)!Qty,12,V.uGlobal.uOps(v.Local.iOp)!Qty)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.conx!rst.Close
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uHeader!TRMNL,V.Caller.Terminal)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uHeader!Type,"Inventor")
+F.Intrinsic.Variable.UDTSetmemberValue(V.uGlobal.uHeader!FLAG_HEADER,True)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uOps!TRMNL,V.Caller.Terminal)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uOps!Flag_Header,False)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uOps!Type,"Inventor")
+
+F.ODBC.connection!conX.OpenLocalRecordsetRW("rstSave","SELECT * FROM GCG_3538_LMD_WOUPL_T")
+
+
+F.Intrinsic.Variable.SaveUDTToRecordset("Conx","rstSave","V.uGlobal.uHeader")
+
+F.Intrinsic.Variable.saveudttorecordset("Conx","rstSave","V.uGlobal.uOps")
+
+F.ODBC.conx!rstSave.Close
+F.ODBC.Connection!CONX.Close
+
+
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("ReadInventor_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.ReadInventor.End
+
+Program.Sub.ConvertFractions.Start
+F.Intrinsic.Control.SetErrorHandler("ConvertFractions_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+V.Local.sWidth.Declare(String)
+V.Local.sWidthInches.Declare(String)
+V.Local.sAllWInches.Declare(String)
+V.Local.sAllWInches.Set("0")
+V.Local.sWidthFraction.Declare(String)
+V.Local.sWidthFracDecimal.Declare(String)
+V.Local.bInString.Declare(Boolean)
+V.Local.sQuotes.Declare(String)
+V.Local.sLength.Declare(String)
+V.Local.sLengthInches.Declare(String)
+V.Local.sAllLInches.Declare(String)
+V.Local.sAllLInches.Set("0")
+V.Local.sLengthFraction.Declare(String)
+V.Local.sLengthFracDecimal.Declare(String)
+
+'these are the format combinations that were tested during programming
+
+'    1'-1 1/8"
+'    1'
+'    1"
+'    1/8"
+'    1 1/8"
+'    1'-1"
+'    1'-1/8"
+V.Local.sQuotes.Set(V.Ambient.DblQuote)
+'
+'
+
+'Converting Width
+F.Intrinsic.control.If(V.Args.Width.Trim,<>,"")
+	F.Intrinsic.String.Split(V.Args.Width.Trim,"-",V.Local.sWidth)
+	F.Intrinsic.Control.If(V.Local.sWidth.UBound,>,0)
+		'This value has feet and inches. Get rid of '
+		F.Intrinsic.String.Replace(V.Local.sWidth(0).Trim,"'","",V.Local.sWidth(0))
+		'Multiply feet by 12 to get inch value from feet
+		F.Intrinsic.Math.Mult(V.Local.sWidth(0).Trim,12,V.Local.sWidth(0))
+		F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidth(0).Trim,V.Local.sAllWInches)
+		'Get whole inches before fraction of inches
+		F.Intrinsic.String.Split(V.local.sWidth(1).Trim," ",V.Local.sWidthInches)
+		F.Intrinsic.Control.If(V.Local.sWidthInches.UBound,>,0)
+			'Found Whole Inches	
+			F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthInches(0).Trim,V.Local.sAllWInches)
+			F.Intrinsic.String.Replace(V.Local.sWidthInches(1).Trim,V.Local.sQuotes,"",V.local.sWidthInches(1))
+			F.Intrinsic.String.Split(V.Local.sWidthInches(1).Trim,"/",V.Local.sWidthFraction)
+			F.Intrinsic.Math.Div(V.Local.sWidthFraction(0).trim,V.Local.sWidthFraction(1).Trim,V.Local.sWidthFracDecimal)
+			F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthFracDecimal,V.Local.sAllWInches)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Replace(V.Local.sWidthInches(0).Trim,V.Local.sQuotes,"",V.local.sWidthInches(0))
+			F.Intrinsic.String.Split(V.Local.sWidthInches(0).Trim,"/",V.local.sWidthFraction)
+			F.Intrinsic.Control.If(V.Local.sWidthFraction.UBound,>,0)
+				'Is a fraction
+				F.Intrinsic.Math.Div(V.Local.sWidthFraction(0).Trim,V.Local.sWidthFraction(1).Trim,V.Local.sWidthFracDecimal)
+				F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthFracDecimal,V.Local.sAllWInches)
+			F.Intrinsic.Control.Else
+				'is just a whole number with no fraction
+				F.Intrinsic.Math.Add(V.local.sAllWInches,V.Local.sWidthFraction(0).Trim,V.Local.sAllWInches)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.IsInString(V.Local.sWidth(0).Trim,"'",True,V.Local.bInString)
+		F.Intrinsic.Control.If(V.Local.bInString,=,True)
+			'Value is JUST feet
+			F.Intrinsic.String.Replace(V.Local.sWidth(0).Trim,"'","",V.Local.sWidth(0))
+			F.Intrinsic.Math.Mult(V.Local.sWidth(0).Trim,12,V.Local.sWidth(0))
+			F.Intrinsic.math.Add(V.Local.sAllWInches,V.Local.sWidth(0).Trim,V.Local.sAllWInches)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Split(V.Local.sWidth(0).Trim," ",V.Local.sWidthInches)
+			F.Intrinsic.Control.If(V.Local.sWidthInches.UBound,>,0)
+				'Found Whole Inches
+				F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthInches(0).Trim,V.Local.sAllWInches)
+				F.Intrinsic.String.Replace(V.Local.sWidthInches(1).Trim,V.Local.sQuotes,"",V.local.sWidthInches(1))
+				F.Intrinsic.String.Split(V.Local.sWidthInches(1).trim,"/",V.Local.sWidthFraction)
+				F.Intrinsic.Math.Div(V.Local.sWidthFraction(0).Trim,V.Local.sWidthFraction(1).Trim,V.Local.sWidthFracDecimal)
+				F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthFracDecimal,V.Local.sAllWInches)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.IsInString(V.local.sWidthInches(0).Trim,"/",True,V.Local.bInString)
+				F.Intrinsic.control.If(V.Local.bInString,=,True)
+					F.Intrinsic.String.Replace(V.local.sWidthInches(0).Trim,V.Local.sQuotes,"",V.local.sWidthInches(0))
+					F.Intrinsic.String.Split(V.Local.sWidthInches(0).Trim,"/",V.local.sWidthFraction)
+					F.Intrinsic.Math.Div(V.Local.sWidthFraction(0).Trim,V.Local.sWidthFraction(1).Trim,V.Local.sWidthFracDecimal)
+					F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthFracDecimal,V.Local.sAllWInches)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.String.Replace(V.Local.sWidthInches(0).trim,V.Local.sQuotes,"",V.local.sWidthInches(0))
+					F.Intrinsic.Math.Add(V.Local.sAllWInches,V.Local.sWidthInches(0).Trim,V.local.sAllWInches)
+				F.Intrinsic.Control.endif
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Variable.AddRV("Width",V.Local.sAllWInches)
+F.Intrinsic.Control.EndIf
+
+
+'Converting Length(WIdth)
+'WInches
+F.Intrinsic.control.If(V.args.Length.Trim,<>,"")
+	F.Intrinsic.String.Split(V.args.Length.Trim,"-",V.Local.slength)
+	F.Intrinsic.Control.If(V.Local.sLength.UBound,>,0)
+		'This value has feet and inches. Get rid of '
+		F.Intrinsic.String.Replace(V.Local.sLength(0).Trim,"'","",V.Local.sLength(0))
+		'Multiply feet by 12 to get inch value from feet
+		F.Intrinsic.Math.Mult(V.Local.sLength(0).Trim,12,V.Local.sLength(0))
+		F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLength(0).Trim,V.Local.sAllLInches)
+		'Get whole inches before fraction of inches
+		F.Intrinsic.String.Split(V.local.sLength(1).Trim," ",V.Local.sLengthInches)
+		F.Intrinsic.Control.If(V.Local.sLengthInches.UBound,>,0)
+			'Found Whole Inches	
+			F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthInches(0).Trim,V.Local.sAllLInches)
+			F.Intrinsic.String.Replace(V.Local.sLengthInches(1).Trim,V.Local.sQuotes,"",V.local.sLengthInches(1))
+			F.Intrinsic.String.Split(V.Local.sLengthInches(1).Trim,"/",V.Local.sLengthFraction)
+			F.Intrinsic.Math.Div(V.Local.sLengthFraction(0).trim,V.Local.sLengthFraction(1).Trim,V.Local.sLengthFracDecimal)
+			F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthFracDecimal,V.Local.sAllLInches)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Replace(V.Local.sLengthInches(0).Trim,V.Local.sQuotes,"",V.local.sLengthInches(0))
+			F.Intrinsic.String.Split(V.Local.sLengthInches(0).Trim,"/",V.local.sLengthFraction)
+			F.Intrinsic.Control.If(V.Local.sLengthFraction.UBound,>,0)
+				'Is a fraction
+				F.Intrinsic.Math.Div(V.Local.sLengthFraction(0).Trim,V.Local.sLengthFraction(1).Trim,V.Local.sLengthFracDecimal)
+				F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthFracDecimal,V.Local.sAllLInches)
+			F.Intrinsic.Control.Else
+				'is just a whole number with no fraction
+				F.Intrinsic.Math.Add(V.local.sAllLInches,V.Local.sLengthFraction(0).Trim,V.Local.sAllLInches)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.IsInString(V.Local.sLength(0).Trim,"'",True,V.Local.bInString)
+		F.Intrinsic.Control.If(V.Local.bInString,=,True)
+			'Value is JUST feet
+			F.Intrinsic.String.Replace(V.Local.sLength(0).Trim,"'","",V.Local.sLength(0))
+			F.Intrinsic.Math.Mult(V.Local.sLength(0).Trim,12,V.Local.sLength(0))
+			F.Intrinsic.math.Add(V.Local.sAllLInches,V.Local.sLength(0).Trim,V.Local.sAllLInches)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Split(V.Local.sLength(0).Trim," ",V.Local.sLengthInches)
+			F.Intrinsic.Control.If(V.Local.sLengthInches.UBound,>,0)
+				'Found Whole Inches
+				F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthInches(0).Trim,V.Local.sAllLInches)
+				F.Intrinsic.String.Replace(V.Local.sLengthInches(1).Trim,V.Local.sQuotes,"",V.local.sLengthInches(1))
+				F.Intrinsic.String.Split(V.Local.sLengthInches(1).trim,"/",V.Local.sLengthFraction)
+				F.Intrinsic.Math.Div(V.Local.sLengthFraction(0).Trim,V.Local.sLengthFraction(1).Trim,V.Local.sLengthFracDecimal)
+				F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthFracDecimal,V.Local.sAllLInches)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.IsInString(V.local.sLengthInches(0).Trim,"/",True,V.Local.bInString)
+				F.Intrinsic.control.If(V.Local.bInString,=,True)
+					F.Intrinsic.String.Replace(V.local.sLengthInches(0).Trim,V.Local.sQuotes,"",V.local.sLengthInches(0))
+					F.Intrinsic.String.Split(V.Local.sLengthInches(0).Trim,"/",V.local.sLengthFraction)
+					F.Intrinsic.Math.Div(V.Local.sLengthFraction(0).Trim,V.Local.sLengthFraction(1).Trim,V.Local.sLengthFracDecimal)
+					F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthFracDecimal,V.Local.sAllLInches)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.String.Replace(V.Local.sLengthInches(0).trim,V.Local.sQuotes,"",V.local.sLengthInches(0))
+					F.Intrinsic.Math.Add(V.Local.sAllLInches,V.Local.sLengthInches(0).Trim,V.local.sAllLInches)
+				F.Intrinsic.Control.endif
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.variable.AddRV("Length",V.Local.sAllLInches)
+F.Intrinsic.Control.EndIf
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("ConvertFractions_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.ConvertFractions.End
+
+Program.Sub.CallUploadScreen.Start
+F.Intrinsic.Control.SetErrorHandler("LoadScreen_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+V.Local.iPID.Declare(Long)
+V.Local.sPath.Declare(String)
+
+F.Intrinsic.String.Concat(V.Caller.PluginsDir,"\GAB\GAS\GCG_3538_LMD_WO_UPL.gas",V.Local.sPath)
+F.Global.General.CallASyncGAS(V.Local.sPath,V.Local.iPID)
+
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("LoadScreen_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CallUploadScreen.End
+
+Program.Sub.Length.Start
+F.Intrinsic.Control.SetErrorHandler("Length_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+V.Local.sError.Declare(String)
+
+' length used to be simple decimal feet.  now its coming in as n' - n" (feet and inches)
+V.Local.sVal.Declare(String)
+V.Local.sInches.Declare(String)
+V.Local.sFraction.Declare(String)
+V.Local.fRet.Declare(Float)
+V.Local.fHold.Declare(Float)
+
+F.Intrinsic.String.Split(V.Args.LEN,"-",V.Local.sVal)
+F.Intrinsic.Control.If(V.Local.sVal.UBound,>,0)
+	F.Intrinsic.String.Replace(V.Local.sVal(0),"'","",V.Local.sVal(0))
+	F.Intrinsic.String.Replace(V.Local.sVal(1),V.Ambient.DblQuote,"",V.Local.sVal(1))
+	
+	' of course, there could be something like 0' - 1 1/2"
+	F.Intrinsic.String.Split(V.Local.sVal(1),"/",V.Local.sInches)
+	F.Intrinsic.Control.If(V.Local.sInches.UBound,>,0)
+
+		F.Intrinsic.String.Split(V.Local.sVal(1)," ",V.Local.sInches)
+		F.Intrinsic.String.Split(V.Local.sInches(1),"/",V.Local.sFraction)
+		F.Intrinsic.Math.Div(V.Local.sFraction(0).Float,V.Local.sFraction(1).Float,V.Local.fHold)
+		F.Intrinsic.Math.Add(V.Local.sInches(0).Float,V.Local.fHold,V.Local.fRet)
+		F.Intrinsic.Math.Div(V.Local.fRet,12,V.Local.fRet)
+
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Local.sVal(1).Float,12,V.Local.fRet)
+
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Math.Add(V.Local.sVal(0).Float,V.Local.fRet,V.Local.fRet)
+F.Intrinsic.Control.Else
+	V.Local.fRet.Set(V.Args.LEN)
+
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Format(V.Local.fRet,"0.000",V.Local.sInches)
+
+F.Intrinsic.Variable.AddRV("LEN",V.Local.sInches)
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("Length_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Length.End
+
+Program.Sub.CalculatePL.Start
+F.Intrinsic.Control.SetErrorHandler("CalculatePL_Err")
+F.Intrinsic.Control.ClearErrors
+'ERROR HANDLING ABOVE
+
+'DECLARE VARIABLES
+
+V.Local.sDimensions.Declare(String)
+V.Local.sHeight.Declare(String)
+V.Local.sWidth.Declare(String)
+V.Local.fHeight.Declare(Long)
+V.Local.fWidth.Declare(Float)
+V.Local.sTempPart.Declare(String)
+V.Local.fQTY.Declare(Float)
+V.Local.iUB.Declare(Long)
+V.Local.sTemp.Declare(String)
+V.Local.sError.Declare(String)
+V.Local.bNumeric.Declare(Boolean)
+V.Local.fLen.Declare(Float)
+
+V.Local.fQTY.Set(V.Args.QTY.Float)
+
+F.Intrinsic.String.Replace(V.args.sPart,"PL","",V.Local.sTempPart)
+F.Intrinsic.String.Trim(V.Local.sTempPart,V.Local.sTempPart)
+F.Intrinsic.String.Split(V.Local.sTempPart,"X",V.Local.sTempPart)
+
+F.Intrinsic.String.Replace(V.Local.sTempPart(1),V.Ambient.DblQuote,"",V.Local.sTempPart(1))
+F.Intrinsic.String.Split(V.Local.sTempPart(1)," ",V.Local.sDimensions)
+
+F.Intrinsic.Control.If(V.Local.sDimensions.UBound,>=,1)
+	F.Intrinsic.String.Split(V.Local.sDimensions(1),"/",V.Local.sWidth)
+
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sDimensions(0),"/",V.Local.sWidth)
+
+F.Intrinsic.Control.EndIf
+
+V.Local.iUB.Set(V.Local.sWidth.UBound)
+F.Intrinsic.Control.If(V.Local.iUB,>=,1)
+'	V.Local.fQTY.Set(0)
+	F.Intrinsic.Math.IsNumeric(V.Local.sWidth(0),V.Local.bNumeric)
+
+	F.Intrinsic.Control.If(V.Local.bNumeric,<>,True)
+		F.Intrinsic.String.Concat("Error calculating quantity.  The following string is non-numeric: ",V.Local.sWidth(0),V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(Exit)
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Math.IsNumeric(V.Local.sWidth(1),V.Local.bNumeric)
+
+	F.Intrinsic.Control.If(V.Local.bNumeric,<>,True)
+		F.Intrinsic.String.Concat("Error calculating quantity.  The following string is non-numeric: ",V.Local.sWidth(1),V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(Exit)
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Math.Div(V.Local.sWidth(0),V.Local.sWidth(1),V.Local.fWidth)
+
+F.Intrinsic.Control.Else
+	V.Local.fWidth.Set(V.Local.sWidth(0))
+
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Local.sDimensions.UBound,>=,1)
+	F.Intrinsic.Math.IsNumeric(V.Local.sDimensions(0),V.Local.bNumeric)
+
+	F.Intrinsic.Control.If(V.Local.bNumeric,<>,True)
+		F.Intrinsic.String.Concat("Error calculating quantity.  The following string is non-numeric: ",V.Local.sDimensions(0),V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.CallSub(Exit)
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Math.Add(V.Local.fWidth,V.Local.sDimensions(0),V.Local.fWidth)
+F.Intrinsic.Control.EndIf
+
+'Makes sure numbers are numeric.
+F.Intrinsic.Math.IsNumeric(V.Local.fWidth,V.Local.bNumeric)
+F.Intrinsic.Control.If(V.Local.bNumeric,<>,True)
+	F.Intrinsic.String.Concat("Error calculating quantity.  The following string is non-numeric: ",V.Local.fWidth,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Exit)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.IsNumeric(V.Args.Length,V.Local.bNumeric)
+
+F.Intrinsic.Control.If(V.Local.bNumeric,<>,True)
+	F.Intrinsic.String.Concat("Error calculating quantity.  The following string is non-numeric: ",V.Args.Length,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Exit)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.IsNumeric(V.Local.fQTY,V.Local.bNumeric)
+
+F.Intrinsic.Control.If(V.Local.bNumeric,<>,True)
+	F.Intrinsic.String.Concat("Error calculating quantity.  The following string is non-numeric: ",V.Local.fQTY,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Exit)
+F.Intrinsic.Control.EndIf
+
+'quantity x width (in inches) x (12 x length) / 144
+F.Intrinsic.Math.Mult(V.Local.fQTY,V.Local.fWidth,V.Local.fQTY)
+F.Intrinsic.Math.Mult(12,V.Args.Length,V.Local.fLen)
+F.Intrinsic.Math.Mult(V.Local.fQTY,V.Local.fLen,V.Local.fQTY)
+F.Intrinsic.Math.Div(V.Local.fQTY,144,V.Local.fQTY)
+
+F.Intrinsic.String.Format(V.Local.fQTY,"####0.00000",V.Local.sTemp)
+V.Local.fQTY.Set(V.Local.sTemp)
+F.Intrinsic.Math.Round(V.Local.fQTY,4,V.Local.fQTY)
+
+F.Intrinsic.Variable.AddRV("fQTY",V.Local.fQTY)
+
+
+'TERMINATE SUBROUTINE
+F.Intrinsic.Control.ExitSub
+
+'ERROR HANDLING BELOW
+F.Intrinsic.Control.Label("CalculatePL_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3538_XSTEEL_INVENTOR_TO_TEMP.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CalculatePL.End
+
+Program.Sub.Exit.Start
+F.Intrinsic.Control.End
+
+Program.Sub.Exit.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$$}$12:00:00 AM$}$False
+Program.Sub.Comments.End
